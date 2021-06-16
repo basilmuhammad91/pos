@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2021 at 07:13 PM
+-- Generation Time: Jun 16, 2021 at 08:00 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -54,7 +54,8 @@ INSERT INTO `categories` (`category_id`, `name`, `image`, `is_deleted`, `user_id
 (11, 'dsafsadf', NULL, 'No', 1, '2021-06-03 11:58:27'),
 (12, 'adsf', 'Images/Categories/WkYvLPeLhR8mCQpD116HHdAj7SATicNwePRvL8xj.png', 'No', 1, '2021-06-03 12:07:36'),
 (13, 'adsf', 'Images/Categories/w7MkN0dq7Ix7Vj04HrjaJQq7ypti9Tn6xOCgntxP.jpg', 'No', 7, '2021-06-03 16:40:01'),
-(14, 'Rashid', 'Images/Categories/eUXG5dPpt8HBUewmHRmWShHPr27EpZfwiATyeZXD.png', 'No', 7, '2021-06-05 17:29:00');
+(14, 'Rashid', 'Images/Categories/eUXG5dPpt8HBUewmHRmWShHPr27EpZfwiATyeZXD.png', 'No', 7, '2021-06-05 17:29:00'),
+(15, 'Category', 'Images/Categories/b2k4bq72X7XSK57NiQYbMPASTLR1dHd0t921DJ0F.png', 'No', 1, '2021-06-16 15:55:49');
 
 -- --------------------------------------------------------
 
@@ -240,8 +241,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `category_id`, `description`, `model`, `year`, `is_featured`, `discount_id`, `stock`, `stock_sold`, `o_price`, `s_price`, `image`, `user_id`, `status`, `is_deleted`, `date`) VALUES
-(6, 'Bat', 4, NULL, '2001', '2008', 'on', NULL, 100, 0, 1000, 1300, 'Images/Products/4bqEWBBSsvpRz0PnQkyYUvwVISWVE5zUA9qq936y.png', 1, 'Active', 'No', '2021-06-04 12:17:08'),
-(7, 'ball', 4, NULL, NULL, NULL, NULL, NULL, 100, 0, 100, 150, NULL, 1, 'Active', 'No', '2021-06-05 13:11:40');
+(6, 'Bat', 4, NULL, '2001', '2008', 'on', NULL, 100, 0, 1000, 1500, 'Images/Products/4bqEWBBSsvpRz0PnQkyYUvwVISWVE5zUA9qq936y.png', 1, 'Active', 'No', '2021-06-04 12:17:08'),
+(7, 'ball', 4, NULL, NULL, NULL, NULL, NULL, 100, 0, 100, 150, NULL, 1, 'Active', 'No', '2021-06-05 13:11:40'),
+(8, 'Mobile', 15, NULL, 'Redmi 9c', '2021', 'on', NULL, 48, 2, 18000, 19000, 'Images/Products/4VyW9Ihx4RTgFs9Cp3PuYgQeSLcapNDPEwYFuqY8.png', 1, 'Active', 'No', '2021-06-16 15:58:41');
 
 -- --------------------------------------------------------
 
@@ -251,9 +253,10 @@ INSERT INTO `products` (`product_id`, `name`, `category_id`, `description`, `mod
 
 CREATE TABLE `product_sales` (
   `product_sale_id` int(11) NOT NULL,
-  `sale_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `price` double NOT NULL,
+  `sale_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `price` double DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -261,12 +264,36 @@ CREATE TABLE `product_sales` (
 -- Dumping data for table `product_sales`
 --
 
-INSERT INTO `product_sales` (`product_sale_id`, `sale_id`, `product_id`, `price`, `date`) VALUES
-(1, 1, 6, 20000, '2021-06-05 10:35:52'),
-(2, 1, 6, 30000, '2021-06-05 11:41:41'),
-(3, 1, 7, 150, '2021-06-05 13:12:30'),
-(4, 1, 6, 200, '2021-06-05 14:06:05'),
-(5, 1, 7, 500, '2021-06-05 14:06:05');
+INSERT INTO `product_sales` (`product_sale_id`, `sale_id`, `product_id`, `quantity`, `price`, `date`) VALUES
+(6, 1, 6, 2, 3000, '2021-06-14 13:18:44'),
+(7, 1, 7, 7, 1050, '2021-06-14 13:18:44'),
+(8, NULL, 7, NULL, NULL, '2021-06-16 13:00:54'),
+(9, NULL, 6, NULL, NULL, '2021-06-16 13:00:54'),
+(10, NULL, 7, 1, NULL, '2021-06-16 13:09:30'),
+(11, NULL, 6, 1, NULL, '2021-06-16 13:09:30'),
+(12, NULL, 7, 4, NULL, '2021-06-16 13:09:54'),
+(13, NULL, 6, 10, NULL, '2021-06-16 13:09:54'),
+(14, NULL, 7, 3, 150, '2021-06-16 13:15:00'),
+(15, NULL, 6, 1, 1500, '2021-06-16 13:15:00'),
+(16, NULL, 6, 4, 1500, '2021-06-16 13:15:20'),
+(17, NULL, 7, 8, 150, '2021-06-16 13:15:20'),
+(18, NULL, 6, 4, 1500, '2021-06-16 13:15:48'),
+(19, NULL, 7, 8, 150, '2021-06-16 13:15:48'),
+(20, NULL, 7, 3, 450, '2021-06-16 13:16:02'),
+(21, NULL, 6, 4, 6000, '2021-06-16 13:16:02'),
+(22, NULL, 7, 2, 300, '2021-06-16 13:26:25'),
+(23, NULL, 6, 1, 1500, '2021-06-16 13:26:25'),
+(24, 8, 7, 2, 300, '2021-06-16 13:47:00'),
+(25, 8, 6, 1, 1500, '2021-06-16 13:47:00'),
+(26, 9, 7, 4, 600, '2021-06-16 14:13:55'),
+(27, 9, 6, 3, 4500, '2021-06-16 14:13:55'),
+(28, 10, 8, 1, 19000, '2021-06-16 15:59:00'),
+(29, 11, 8, 2, 38000, '2021-06-16 16:23:56'),
+(30, 12, 8, 2, 38000, '2021-06-16 16:24:11'),
+(31, 13, 8, 2, 38000, '2021-06-16 16:24:28'),
+(32, 14, 8, 1, 19000, '2021-06-16 16:27:05'),
+(33, 15, 8, 2, 38000, '2021-06-16 16:48:17'),
+(34, 16, 8, 2, 38000, '2021-06-16 16:49:04');
 
 -- --------------------------------------------------------
 
@@ -276,12 +303,12 @@ INSERT INTO `product_sales` (`product_sale_id`, `sale_id`, `product_id`, `price`
 
 CREATE TABLE `sales` (
   `sale_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `receiver_id` int(11) NOT NULL,
-  `total` double NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `is_deleted` varchar(255) NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `is_deleted` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -290,7 +317,22 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`sale_id`, `customer_id`, `receiver_id`, `total`, `status`, `is_deleted`, `user_id`, `date`) VALUES
-(1, 7, 8, 50000, 'Completed', 'No', 1, '2021-06-05 15:03:11');
+(1, 7, 8, 4050, 'Completed', 'No', 1, '2021-06-14 13:22:50'),
+(2, NULL, NULL, 1800, NULL, NULL, NULL, '2021-06-16 13:26:25'),
+(3, NULL, NULL, 1800, NULL, NULL, NULL, '2021-06-16 13:45:52'),
+(4, NULL, NULL, 1800, NULL, NULL, NULL, '2021-06-16 13:46:08'),
+(5, NULL, NULL, 1800, NULL, NULL, NULL, '2021-06-16 13:46:13'),
+(6, NULL, NULL, 1800, NULL, NULL, NULL, '2021-06-16 13:46:45'),
+(7, NULL, NULL, 1800, NULL, NULL, NULL, '2021-06-16 13:46:50'),
+(8, 7, 8, 1800, 'Completed', 'No', 1, '2021-06-16 14:05:03'),
+(9, NULL, NULL, 5100, 'Completed', 'No', 1, '2021-06-16 14:13:55'),
+(10, NULL, NULL, 19000, 'Completed', 'No', 1, '2021-06-16 15:59:00'),
+(11, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:23:56'),
+(12, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:24:11'),
+(13, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:24:28'),
+(14, NULL, NULL, 19000, 'Completed', 'No', 1, '2021-06-16 16:27:05'),
+(15, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:48:17'),
+(16, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:49:04');
 
 -- --------------------------------------------------------
 
@@ -463,7 +505,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -505,19 +547,19 @@ ALTER TABLE `outlets`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `product_sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `product_sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `settings`

@@ -55,12 +55,89 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card border-primary filterable">
+
                         <div class="card-header bg-primary text-white">
                             <h3 class="card-title">
                                 <i class="fa fa-fw fa-users"></i> All Categories / Brands
                             </h3>
                         </div>
                         <div class="card-body text-center">
+                            <div class="row text-right">
+                                <div class="col-md-12">
+                                    <span class="btn btn-success float-right mr-3" data-toggle="modal" data-target="#formModal" style="float: right;">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Add Categories / Brands</span>
+                                    </span>
+                                </div>
+                            </div>
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myModalLabel">Add Category</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-validation3" action="{{action('CategoryController@submit')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 offset-3">
+                            <div class="form-group">
+                                <input type="text" name="name"
+                                       id="modalfirst_name"
+                                       class="form-control input-md"
+                                       placeholder="Customer Name" tabindex="1"
+                                       data-error="First name must be entered"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 offset-3">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <h5>Select Image</h5>
+                                    <div class="">
+                                        <input type="file" id="imgUpload" name="image" class="dropify">
+                                        <!-- <div class="dropify-message"><span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong happended.</p></div><div class="dropify-loader"></div><div class="dropify-errors-container"><ul></ul></div><input type="file" class="dropify"><button type="button" class="dropify-clear">Remove</button><div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="dropify-filename-inner"></span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12 text-left">
+                                    <img id="imgPreview" style="width: 100px !important;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                              <!-- END OF SELECT DROPDOWN -->
+                        <div class="col-md-6 text-left offset-3">
+                            <input type="submit" id="btncheck" value="Add Category / Brand"
+                                   class="btn btn-primary btn-block btn-md btn-responsive"
+                                   tabindex="7" style="color: white;">
+                        </div>
+                    </div>
+                    <!-- <div class="row marginTop">
+                        <div class="col-6 col-md-6">
+                            <input type="submit" id="btncheck" value="Add Customer"
+                                   class="btn btn-primary btn-block btn-md btn-responsive"
+                                   tabindex="7">
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+                            
                         	<div class="row">
                         		@foreach($category as $obj)
                         		<div class="col-md-2 text-center mb-3 mt-5">

@@ -35,19 +35,22 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-12 col-xs-12 invoice_bg">
                                     <h4><img src="{{asset('DashboardAssets')}}/img/logoblue.png" alt="coreplus" class="m-l-40"/></h4>
-                                    <h4><strong>Billing Details:</strong></h4>
+                                    @if($sale->customer_id != null)
+                                    <h4><strong>Customer Details:</strong></h4>
                                     <address>
-                                    	<strong>Customer Name:</strong>{{ $sale->customer->name }}
+                                        <strong>Customer Name:</strong>{{ $sale->customer->name }}
                                         <br> <strong>Father Name: </strong>{{ $sale->customer->father_name }}
                                         <br/> <strong>Phone:</strong>{{ $sale->customer->phone }}
                                         <br/> <strong>CNIC:</strong> {{ $sale->customer->cnic }}
                                         <br/> <strong>Address:</strong> {{ $sale->customer->address }}
                                     </address>
+                                    @endif
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12 invoice_bg text-right">
                                     <div class="pull-right">
                                     	<br>
                                         <h4><strong>#{{$sale->sale_id}} / 25 Sep 2016</strong></h4>
+                                        @if($sale->receiver_id != null)
                                         <h4><strong>Invoice Info:</strong></h4>
                                         <address>
                                             <strong>Receiver Name:</strong>{{ $sale->receiver->name }}
@@ -56,6 +59,7 @@
 	                                        <br/> <strong>CNIC:</strong> {{ $sale->receiver->cnic }}
 	                                        <br/> <strong>Address:</strong> {{ $sale->receiver->address }}
                                         </address>
+                                        @endif
                                         <span></span>
                                     </div>
                                 </div>
@@ -85,12 +89,11 @@
                                             <strong>Selling Price</strong>
                                         </th>
                                         <th class="text-center">
-                                            <strong>Profit</strong>
-                                        </th>
-                                        <th class="text-center">
                                         	<strong>Total</strong>
                                         </th>
-                                        <th class="text-center" id="add_row"><i class="fa fa-fw fa-plus"></i></th>
+                                        <th class="text-center">
+                                            <strong>Total Profit</strong>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -115,25 +118,23 @@
                                         	@endif
                                         </td>
                                         <td class="text-center" contenteditable>
-                                        	5
+                                        	{{ $product_sale->quantity }}
                                         </td>
                                         <td class="text-center">
                                         	{{ $product_sale->product->s_price }}
                                         </td>
                                         <td class="text-center" contenteditable>
-                                        	{{ $product_sale->product->s_price - $product_sale->product->o_price }}
+                                        	{{ $product_sale->price }}
                                         </td>
                                         <td class="text-center" contenteditable>
-                                        	{{ $product_sale->product->s_price }}
+                                            {{ ($product_sale->product->s_price - $product_sale->product->o_price)*$product_sale->quantity }}
                                         </td>
-                                        <td class="text-center row_delete"><i class="fa fa-fw fa-times"></i></td>
                                     </tr>
                                     @endforeach
                                     
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <td class="highrow"></td>
                                         <td class="highrow"></td>
                                         <td class="highrow"></td>
                                         <td class="highrow"></td>
@@ -146,11 +147,10 @@
                                             </strong>
                                         </td>
                                         <td class="highrow text-center">
-                                            <strong>$3638</strong>
+                                            <strong>{{ $sale->total }}</strong>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="emptyrow"></td>
                                         <td class="emptyrow"></td>
                                         <td class="emptyrow"></td>
                                         <td class="emptyrow"></td>
@@ -163,14 +163,13 @@
                                             </strong>
                                         </td>
                                         <td class="highrow text-center">
-                                            <strong>$30</strong>
+                                            <strong></strong>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="emptyrow">
                                             <i class="livicon" data-name="barcode" data-size="60" data-loop="true"></i>
                                         </td>
-                                        <td class="emptyrow"></td>
                                         <td class="emptyrow"></td>
                                         <td class="emptyrow"></td>
                                         <td class="emptyrow"></td>
@@ -182,7 +181,7 @@
                                             </strong>
                                         </td>
                                         <td class="highrow text-center">
-                                            <strong>$3668</strong>
+                                            <strong>{{ $sale->total }}</strong>
                                         </td>
                                     </tr>
                                     </tfoot>

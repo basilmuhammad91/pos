@@ -77,17 +77,10 @@
                         	<div class="row">
                              <div class="col-md-9">
                                 <div class="row">
-<script type="text/javascript">
-     var cart = [];
-     var count = 0;
-     var grand_total = 0;
-
-
-</script>
                                     @foreach($category->product as $obj)
                                     <div class="col-md-3 col-lg-2 col-sm-4 text-center mb-3 mt-5">
                                         <div class="text-center" style="margin: auto;">
-                                            <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_{{ $obj->product_id }}" >
+                                            <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_{{ $obj->product_id }}" onclick="myFunction('{{$obj->name}}', {{$obj->product_id }}, {{ $obj->s_price }});" >
                                                 <h6 style="color: white; text-transform: uppercase; background-color: 2c6ea8; padding: 0.1em 2em; background-color: 2c6ea8; border-radius: 0.3em 0.3em 0 0; margin: 0; ">{{ $obj->category->name }}</h6>
                                                 <div class="sub-box px-4 py-4" style="background-color: white; margin-bottom: 0.9em; box-shadow: inset 0 0 4px #000000; ">
                                                     
@@ -105,53 +98,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <script type="text/javascript">
-    $(document).ready(function(){
-var qty_{{ $obj->product_id }} = 0;
-
-        $('#add_product_{{ $obj->product_id }}').click(function(){
-            grand_total += <?php echo $obj->s_price ?>;
-            cart.push("{{ $obj->product_id }}");
-                $("#invoice").append('<div class="row sub-invoice text-left mx-2 my-2 px-1 py-2" id="invoice-row"><div class="col-12"></div><div class="col-8 mt-2"><b><h4>{{ $obj->name }}</h4></b></div><div class="col-4 text-right"><span class="float-right close_btn" id="close_btn" style="cursor: pointer;"><i class="fa fa-fw fa-times-circle"></i></span><br><h5 style="margin: 0; padding: 0; ">$200</h5></div><div class="col-12"><span id="qty_plus_{{ $obj->product_id }}"><i class="fa fa-fw fa-plus-circle"></i> <span id="qty_{{ $obj->product_id }}"></span> Unit(s) </span><span class="mr-3"><i class="fa fa-fw fa-minus-circle"></i> {{ $obj->s_price }} per unit</span></div></div>');
-            });
-        });
-
-        $('#qty_plus_{{ $obj->product_id }}').click(function(){
-            qty_{{ $obj->product_id }}++;
-            document.getElementById("qty_plus_{{ $obj->product_id }}").textContent="newtext";
-            
-        });
-
-    count++;
-</script>
                                     @endforeach
                                 </div>
                              </div>   
 
-                             <div class="col-md-3">
+                            <div class="col-md-3">
+                                <form method="post" action="{{action('SaleController@generate_sales')}}">
+                                    @csrf
                                 <div class="invoice" id="invoice">
-                                    <!-- <div class="row sub-invoice text-left mx-2 my-2 px-1 py-2" id="invoice-row">
-                                        <div class="col-12">
-                                            
-                                        </div>
-                                        <div class="col-8 mt-2">
-                                            <b><h4>Honda</h4></b>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <span class="float-right close_btn" id="close_btn" style="cursor: pointer;"><i class="fa fa-fw fa-times-circle"></i></span>
-                                            <br>
-                                            <h5 style="margin: 0; padding: 0; ">$200</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <span><i class="fa fa-fw fa-plus-circle"></i>1 Unit(s)</span>
-                                            <span class="ml-2"><i class="fa fa-fw fa-money"></i> $100 per unit</span>
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <br>
                                 <div class="row px-3 py-2">
                                     <div class="col-md-12" style="background-color: #428BCA; color: white; ">
-                                        <h4>GRAND TOTAL: <strong><b><script type="text/javascript">document.write(grand_total); </script></b></strong></h4>
+                                        <h4>GRAND TOTAL: <strong><b><input type="hidden" name="grand_total_input" value="" id="grand_total_input"><span id="grand_total"></span></b></strong></h4>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -164,18 +123,18 @@ var qty_{{ $obj->product_id }} = 0;
                                         <div class="input-group bootstrap-touchspin"><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="demo3" type="text" value="" name="demo3" class="form-control" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn"><button class="btn btn-default bootstrap-touchspin-up" type="button">+</button></span></div>
                                     </div>
                                 </div>
-<br>
+                                <br>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button class="btn btn-default col-12" style="color: black; ">Reset</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button class="btn btn-primary col-12" style="color: white; ">Pay Now</button>
+                                        <button type="submit" class="btn btn-primary col-12" style="color: white; ">Pay Now</button>
                                     </div>
                                 </div>
 
                              </div>
-
+                                </form>
                             </div>
 
                         </div>
@@ -324,3 +283,48 @@ $("#imgUpload2").change(function(){
 });
 </script>
 
+
+<script type="text/javascript">
+    var myArr = [];
+    var grand_total = 0;
+    function myFunction(name, id, unit_price)
+    {
+        var isExist = false;
+        myArr.forEach(function(item){
+            if(item.id == id)
+            {
+                item.quantity++;
+                isExist = true;
+            }
+        });
+
+        if(!isExist)
+        {
+            var obj = new Object();
+            obj.id = id;
+            obj.quantity = 1;
+            obj.price = unit_price;
+            obj.name = name;
+            myArr.push(obj);
+        }
+
+        create_invoice_div();
+        document.getElementById('grand_total').innerHTML = grand_total;
+        document.getElementById('grand_total_input').value = grand_total;
+
+        grand_total =0;
+
+    }
+
+    function create_invoice_div()
+    {
+        var invoice_div = document.getElementById('invoice');
+        invoice_div.innerHTML='';
+        myArr.forEach(function(item){
+            grand_total += item.price*item.quantity;
+            // invoice_div.innerHTML += item.id+" - "+item.quantity+" - "+item.price+" - "+item.quantity*item.price+"<br>";
+            invoice_div.innerHTML += '<div class="row sub-invoice text-left mx-2 my-2 px-1 py-2" id="invoice-row"><div class="col-12"></div><div class="col-8 mt-2"><b><h4>'+item.name+'</h4><input type="hidden" name="product_id[]" value="'+item.id+'" /></b></div><div class="col-4 text-right"><span class="float-right close_btn" id="close_btn" style="cursor: pointer;"><i class="fa fa-fw fa-times-circle"></i></span><br><h5 style="margin: 0; padding: 0; ">'+item.quantity*item.price+'</h5></div><div class="col-12"><span><i class="fa fa-fw fa-plus-circle"></i> <span>'+item.quantity+'</span><input type="hidden" name="quantity[]" value="'+item.quantity+'" /> Unit(s) </span><span class="mr-3"><i class="fa fa-fw fa-minus-circle"></i>'+item.price+'  per unit</span><input type="hidden" name="price[]" value="'+item.quantity*item.price+'" /></div></div>';
+        });
+    }
+
+</script>

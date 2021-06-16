@@ -9,6 +9,8 @@ class Sale extends Model
 {
     use HasFactory;
 
+    public $primaryKey = 'sale_id';
+
     public $timestamps = false;
 
     public function user()

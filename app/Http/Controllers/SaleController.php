@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\ProductSale;
 use App\Models\Category;
-use App\Models\Products;
+use App\Models\Product;
 use DB;
 use Auth;
 
@@ -59,6 +59,41 @@ class SaleController extends Controller
     	->with('category', $category)
     	->with('status', "0")
     	;
+    }
+
+    public function generate_sales(Request $req)
+    {
+
+        $product_id = $req->product_id;
+        $quantity = $req->quantity;
+        $price = $req->price;
+
+        $sale = new Sale();
+        $sale->total = $req->grand_total_input;
+        $sale->is_deleted = "No";
+        $sale->user_id = Auth::User()->id;
+        $sale->status = "Completed";
+        
+        if($sale->save())
+        {
+            foreach ($product_id as $key => $value) {
+                $product_sale = new ProductSale();
+                $product_sale->sale_id = $sale->sale_id;
+                $product_sale->product_id = $value;
+                $product_sale->quantity = $quantity[$key];
+                $product_sale->price = $price[$key];
+                $product_sale->save();
+
+                $product_update = Product::where('product_id',$value)->first();
+                $product = Product::where('product_id',$value)->update([
+                    "stock" => $product_update->stock-$quantity[$key],
+                    "stock_sold" =>$product_update->stock_available+$quantity[$key],
+                ]);
+            }
+        }
+
+        return redirect()->back();
+        
     }
 
 }

@@ -163,7 +163,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="card">
                         <div class="card-body">
@@ -580,10 +580,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- row -->
-            <div id="right">
+            <!-- <div id="right">
                 <div id="slim2">
                     <div class="rightsidebar-right">
                         <div class="rightsidebar-right-content">
@@ -772,7 +772,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- right side bar end -->
         </section>
 

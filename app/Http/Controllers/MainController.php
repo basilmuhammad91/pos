@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Sale;
 use Auth;
+use Carbon\Carbon;
 
 class MainController extends Controller
 {
@@ -21,11 +23,13 @@ class MainController extends Controller
 
     public function dashboard()
     {
+        $today = date("Y-m-d h:i:s");
         $customer = Customer::where('user_id', Auth::User()->id)
             ->where('is_deleted','No')
             ->orderBy('customer_id')
             ->get();
         $total_customer = $customer->count();
+        // $today_sales = Sale::where(["date"=>])->get();
     	return view('dashboard')
         ->with('total_customer',$total_customer)
         ;
