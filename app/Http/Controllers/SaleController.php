@@ -55,19 +55,21 @@ class SaleController extends Controller
     public function pos(Request $req)
     {
     	$category = Category::where(["category_id"=>$req->category_id])->first();
+        $all_category = Category::get();
     	return view('sales.pos')
     	->with('category', $category)
+        ->with('all_category', $all_category)
     	->with('status', "0")
     	;
     }
 
     public function generate_sales(Request $req)
     {
-
+        
         $product_id = $req->product_id;
         $quantity = $req->quantity;
         $price = $req->price;
-
+        
         $sale = new Sale();
         $sale->total = $req->grand_total_input;
         $sale->is_deleted = "No";
@@ -90,8 +92,18 @@ class SaleController extends Controller
                     "stock_sold" =>$product_update->stock_available+$quantity[$key],
                 ]);
             }
+            
+            foreach ($product_id as $key => $value) {
+                $product = Product::where('product_id',$value)->first();
+                if($product->stock <= 0)
+                {
+                    $product = Product::where('product_id',$value)->update([
+                        "status" => "Inactive"
+                    ]);
+                }
+            }
         }
-
+        
         return redirect()->back();
         
     }

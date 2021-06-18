@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="widget-count panel-white">
                                             <div class="item-label text-center">
-                                                <div id="count-box" class="count-box">119</div>
+                                                <div id="count-box" class="count-box">{{ $total_today_sale }}</div>
                                                 <span class="title">Today Sales</span>
                                             </div>
                                             <div class="text-center">
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="widget-count panel-white">
                                             <div class="item-label text-center">
-                                                <div id="count-box2" class="count-box">{{ $total_customer }}</div>
+                                                <div id="" class="count-box">{{ $total_customer }}</div>
                                                 <span class="title">Total Customers</span>
                                             </div>
                                             <div class="text-center">
@@ -128,8 +128,8 @@
                                         </div>
                                         <div class="widget-count panel-white">
                                             <div class="item-label text-center">
-                                                <div id="count-box3" class="count-box">544</div>
-                                                <span class="title">Total income</span>
+                                                <div id="" class="count-box">{{ $total_profit }}</div>
+                                                <span class="title">Total Profit</span>
                                             </div>
                                             <div class="text-center">
                                                 <span><i class="fa fa-level-up" aria-hidden="true"></i></span>
@@ -152,7 +152,7 @@
                                         </div>
                                         <div class="widget-count panel-white">
                                             <div class="item-label text-center">
-                                                <div id="count-box4" class="count-box">1598</div>
+                                                <div id="" class="count-box">{{ $total_sale }}</div>
                                                 <span class="title">Total Sales</span>
                                             </div>
                                         </div>
@@ -160,6 +160,34 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 tile-bottom">
+                            <div class="widget" style="background-color: #48CFAE">
+                                <div class="canvas-interactive-wrapper4">
+                                    <canvas id="canvas-interactive5" style="position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+    height: 135px;
+    width: 100%;"></canvas>
+                                    <div class="cta-wrapper4">
+                                        <div class="item">
+                                            <div class="widget-icon pull-left icon-color animation-fadeIn">
+                                                <i class="fa fa-bar-chart-o fa-size"></i>
+                                            </div>
+                                        </div>
+                                        <div class="widget-count panel-white">
+                                            <div class="item-label text-center">
+                                                <div id="" class="count-box">{{ $total_products }}</div>
+                                                <span class="title">Active Products</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

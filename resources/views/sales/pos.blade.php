@@ -17,6 +17,19 @@
 <!-- END -->
 
 <!--page level css -->
+<link href="{{asset('DashboardAssets')}}/vendors/clockface/css/clockface.css" rel="stylesheet" type="text/css"/>
+<link href="{{asset('DashboardAssets')}}/vendors/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{asset('DashboardAssets')}}/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{asset('DashboardAssets')}}/vendors/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css"/>
+<link href="{{asset('DashboardAssets')}}/vendors/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+<link href="{{asset('DashboardAssets')}}/vendors/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{asset('DashboardAssets')}}/vendors/bootstrap-switch/css/bootstrap-switch.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/css/custom.css">
+
+<link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/css/pickers.css">
+<!--end of page level css-->
+
+<!--page level css -->
 	<link rel="stylesheet" href="vendors/toolbar/css/jquery.toolbar.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 
@@ -77,7 +90,185 @@
                         	<div class="row">
                              <div class="col-md-9">
                                 <div class="row">
-                                    @foreach($category->product as $obj)
+                                    <div class="col-md-12">
+                                        <span class="btn btn-success float-right mr-3" data-toggle="modal" data-target="#formModal">
+                                            <i class="fa fa-plus"></i>
+                                            <span>Add Product</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="myModalLabel">Add Product</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-validation3" action="{{action('ProductController@submit')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="name"
+                                       id="modalfirst_name"
+                                       class="form-control input-md"
+                                       placeholder="Product Name" tabindex="1"
+                                       data-error="First name must be entered"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="model"
+                                       class="form-control input-md"
+                                       placeholder="Model" tabindex="4"
+                                       >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="year"
+                                       class="form-control input-md"
+                                       placeholder="Year" tabindex="4"
+                                       >
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="number" name="o_price"
+                                       class="form-control input-md"
+                                       placeholder="Original Price" tabindex="3"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="number" name="stock"
+                                       class="form-control input-md"
+                                       placeholder="Stock Available" tabindex="3"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="number" name="s_price"
+                                       class="form-control input-md"
+                                       placeholder="Selling Price" tabindex="3"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                  <textarea class="form-control"
+                                       placeholder="Description" name="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                           <div class="form-group text-left">
+                                <label for="select21" class="control-label">
+                                    Select Discount
+                                </label>
+                                <select id="" name="discount_id" class="form-control select2" style="width:100%" >
+                                    <option value="">Select value...</option>
+                                        
+                                    </optgroup> -->
+                                    <option value="">abc</option>
+                                    <option value="">xyz</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group text-left">
+                                <div class="form-group">
+                                    <label for="select21" class="control-label">
+                                        Select Category
+                                    </label>
+                                    <select id="" name="category_id" class="form-control select2" style="width:100%" required="">
+                                        <option value="">Select value...</option>
+                                        @foreach($all_category as $obj)
+                                            <option @if($obj->category_id == $category->category_id) {{ 'selected' }} @endif value="{{$obj->category_id}}">{{$obj->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 text-left">
+                            <label for="select21" class="control-label">
+                                            Select Status
+                            </label>
+                            <select id="" name="status" class="form-control select2" style="width:100%" required="">
+                                <option value="">Select value...</option>
+                                <!-- <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    
+                                </optgroup> -->
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 text-left">
+                            <label for="select21" class="control-label">
+                                            Is this product featured?
+                            </label>
+                            <br>
+                            <input type="checkbox" name="is_featured" class="form-control text-left">
+                            <label for="select21" class="control-label ml-2 text-left">
+                                Feature
+                            </label>
+                        </div>
+                    </div>
+<br>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 text-left">
+                            <h5>Select Image</h5>
+                                <div class="">
+                                    <input type="file" id="imgUpload" name="image" class="dropify">
+                                    <!-- <div class="dropify-message"><span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong happended.</p></div><div class="dropify-loader"></div><div class="dropify-errors-container"><ul></ul></div><input type="file" class="dropify"><button type="button" class="dropify-clear">Remove</button><div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="dropify-filename-inner"></span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div> -->
+                                </div>
+                                <br>
+                                <img id="imgPreview" style="width: 100px !important;">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <br>
+                            <input type="submit" id="btncheck" value="Add Product"
+                                   class="btn btn-primary btn-block btn-md btn-responsive"
+                                   tabindex="7" style="color: white;">
+                        </div>
+                    </div>
+                    <!-- <div class="row marginTop">
+                        <div class="col-6 col-md-6">
+                            <input type="submit" id="btncheck" value="Add Customer"
+                                   class="btn btn-primary btn-block btn-md btn-responsive"
+                                   tabindex="7">
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+                                <div class="row">
+                                    @foreach($category->product->where('status','Active') as $obj)
                                     <div class="col-md-3 col-lg-2 col-sm-4 text-center mb-3 mt-5">
                                         <div class="text-center" style="margin: auto;">
                                             <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_{{ $obj->product_id }}" onclick="myFunction('{{$obj->name}}', {{$obj->product_id }}, {{ $obj->s_price }});" >
@@ -197,6 +388,13 @@
 <!-- begining of page level js -->
 <script type="text/javascript" src="vendors/toolbar/js/jquery.toolbar.min.js"></script>
 <script type="text/javascript" src="js/custom_js/tabs_accordions.js"></script>
+<!-- end of page level js -->
+
+<!-- begining of page level js -->
+<script src="{{asset('DashboardAssets')}}/vendors/iCheck/js/icheck.js"></script>
+<script type="text/javascript" src="{{asset('DashboardAssets')}}/vendors/bootstrap-fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="{{asset('DashboardAssets')}}/vendors/bootstrap-fileinput/js/theme.js">  </script>
+<script src="{{asset('DashboardAssets')}}/js/custom_js/form_elements.js"></script>
 <!-- end of page level js -->
 
 </body>

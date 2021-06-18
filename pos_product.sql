@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2021 at 08:00 PM
+-- Generation Time: Jun 18, 2021 at 08:09 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -98,16 +98,13 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `name`, `father_name`, `email`, `cnic`, `phone`, `address`, `description`, `image`, `status`, `is_deleted`, `user_id`, `date`) VALUES
-(1, 'Osama', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', 'dsfds', 'Images/Customers/WZpphSaNJnYQHcnfbf9OeP5C9dQdYICWiUcJYXGf.png', 'Inactive', 'Yes', 1, '2021-06-01 17:59:55'),
-(2, 'adsf', 'Aijaz', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', 'dfdsf', 'Images/Customers/5AwAJhTy8c8m3HqGKsofsNR9m0DllC5v3g9FuWix.png', 'Inactive', 'Yes', 1, '2021-06-01 18:02:17'),
-(3, 'Bilal', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '45101-1156318-1', '0331381710', 'dsafsadf\r\nsdfsdaf', 'sdfdsaf', 'Images/Customers/Xo5WqdwqT7PLLYLEI5ywvvqyzuurakKbqhYdX4rD.png', 'Inactive', 'Yes', 7, '2021-06-02 12:24:57'),
-(4, 'adsf', 'Aijaz', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, 'Images/Customers/Pq0lnDCyE9p5BCSMWAkK6wa0UIp4TDKJw7hOz0vd.png', 'Inactive', 'Yes', 1, '2021-06-02 13:25:09'),
-(5, 'Rashid', 'Aijaz Abbasi', 'rashidabbasi17@gmail.com', '4510111563181', '(033)138-1710', 'dsafsadf\r\nsdfsdaf', 'daf', 'Images/Customers/PBRt6P9tHZ5k9nIKHijWteIaLPRrHotsD4KUgWfC.png', 'Inactive', 'No', 1, '2021-06-02 13:26:31'),
-(6, 'asdf', 'Aijaz', 'rashidabbasi17@gmail.com', '45101-1156318-1', '03313817104', NULL, NULL, NULL, 'Active', 'No', 7, '2021-06-02 13:33:31'),
 (7, 'Uzair', 'Ali', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, NULL, 'Active', 'No', 8, '2021-06-02 13:40:24'),
-(8, 'Rashid', 'Uzair', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', 'sdfsdfsdf', 'Images/Customers/9IYSLbJvEbAC4gRAfXDvefDbTWijrtcN8T0iP093.png', 'Inactive', 'No', 1, '2021-06-02 15:56:04'),
-(9, 'Rashid', 'Uzair', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', 'fgdsfgd', 'Images/Customers/tjvy4H46Cfn7YndY4qnfqXAs7VXsNNd5zQXGwAIP.png', 'Active', 'Yes', 1, '2021-06-02 15:57:14'),
-(10, 'adsf', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '4510111563181', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, 'Images/Customers/fCgNZGiDFrkOKm4vwzo8tJvKeFiU48oWh4QhfAA6.png', 'Active', 'Yes', 1, '2021-06-02 16:42:30');
+(8, 'Rashid', 'Uzair', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', 'sdfsdfsdf', 'Images/Customers/9IYSLbJvEbAC4gRAfXDvefDbTWijrtcN8T0iP093.png', 'Active', 'No', 1, '2021-06-02 15:56:04'),
+(9, 'Rashid', 'Uzair', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', 'fgdsfgd', 'Images/Customers/tjvy4H46Cfn7YndY4qnfqXAs7VXsNNd5zQXGwAIP.png', 'Active', 'No', 1, '2021-06-02 15:57:14'),
+(10, 'adsf', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '4510111563181', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, 'Images/Customers/fCgNZGiDFrkOKm4vwzo8tJvKeFiU48oWh4QhfAA6.png', 'Active', 'No', 1, '2021-06-02 16:42:30'),
+(11, 'Uzair', NULL, 'uzair@gmail.con', NULL, '454354325', NULL, NULL, 'Images/Customers/l39pOeQ97IEDcXWqfVLc5VQPHw5MAfuA8qkXo9DY.png', 'Active', 'No', 1, '2021-06-18 13:00:46'),
+(12, 'Rashid', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, 'Images/Customers/GcmYMXkqy9T5vQvlZ43h8zCNcQ6v8wlKUkz56hba.png', 'Active', 'No', 11, '2021-06-18 14:10:48'),
+(13, 'Rashid', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '45101-1156318-1', '0331381710', 'dsafsadf\r\nsdfsdaf', NULL, NULL, 'Active', 'No', 13, '2021-06-18 16:50:28');
 
 -- --------------------------------------------------------
 
@@ -242,8 +239,10 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `name`, `category_id`, `description`, `model`, `year`, `is_featured`, `discount_id`, `stock`, `stock_sold`, `o_price`, `s_price`, `image`, `user_id`, `status`, `is_deleted`, `date`) VALUES
 (6, 'Bat', 4, NULL, '2001', '2008', 'on', NULL, 100, 0, 1000, 1500, 'Images/Products/4bqEWBBSsvpRz0PnQkyYUvwVISWVE5zUA9qq936y.png', 1, 'Active', 'No', '2021-06-04 12:17:08'),
-(7, 'ball', 4, NULL, NULL, NULL, NULL, NULL, 100, 0, 100, 150, NULL, 1, 'Active', 'No', '2021-06-05 13:11:40'),
-(8, 'Mobile', 15, NULL, 'Redmi 9c', '2021', 'on', NULL, 48, 2, 18000, 19000, 'Images/Products/4VyW9Ihx4RTgFs9Cp3PuYgQeSLcapNDPEwYFuqY8.png', 1, 'Active', 'No', '2021-06-16 15:58:41');
+(7, 'ball', 4, NULL, NULL, NULL, NULL, NULL, 99, 1, 100, 150, NULL, 1, 'Active', 'No', '2021-06-05 13:11:40'),
+(8, 'Mobile', 15, NULL, 'Redmi 9c', '2021', 'on', NULL, 48, 2, 18000, 19000, 'Images/Products/4VyW9Ihx4RTgFs9Cp3PuYgQeSLcapNDPEwYFuqY8.png', 1, 'Active', 'No', '2021-06-16 15:58:41'),
+(9, 'p', 14, NULL, NULL, NULL, NULL, NULL, 43, 3, 1500, 2000, NULL, 7, 'Active', 'No', '2021-06-17 11:20:03'),
+(10, 'p', 13, NULL, NULL, NULL, NULL, NULL, 60, 0, 800, 1000, NULL, 7, 'Active', 'No', '2021-06-17 11:22:59');
 
 -- --------------------------------------------------------
 
@@ -293,7 +292,56 @@ INSERT INTO `product_sales` (`product_sale_id`, `sale_id`, `product_id`, `quanti
 (31, 13, 8, 2, 38000, '2021-06-16 16:24:28'),
 (32, 14, 8, 1, 19000, '2021-06-16 16:27:05'),
 (33, 15, 8, 2, 38000, '2021-06-16 16:48:17'),
-(34, 16, 8, 2, 38000, '2021-06-16 16:49:04');
+(34, 16, 8, 2, 38000, '2021-06-16 16:49:04'),
+(35, 17, 9, 4, 8000, '2021-06-17 11:20:38'),
+(36, 18, 9, 3, 6000, '2021-06-17 11:50:26'),
+(37, 19, 7, 1, 150, '2021-06-17 13:14:04'),
+(38, 20, 8, 8, 152000, '2021-06-17 15:57:10'),
+(39, 21, 8, 2, 38000, '2021-06-17 15:57:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(255) NOT NULL,
+  `role_description` varchar(255) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`role_id`, `role_name`, `role_description`, `date`) VALUES
+(1, 'Super Admin', NULL, '2021-06-18 10:29:06'),
+(2, 'Admin', NULL, '2021-06-18 10:29:06'),
+(3, 'Manager', NULL, '2021-06-18 10:29:26'),
+(4, 'User', NULL, '2021-06-18 10:29:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_users`
+--
+
+CREATE TABLE `role_users` (
+  `role_user_id` int(11) NOT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `role_users`
+--
+
+INSERT INTO `role_users` (`role_user_id`, `role_id`, `user_id`, `date`) VALUES
+(9, 2, 13, '2021-06-18 16:19:34'),
+(10, 2, 1, '2021-06-18 16:49:59');
 
 -- --------------------------------------------------------
 
@@ -332,7 +380,12 @@ INSERT INTO `sales` (`sale_id`, `customer_id`, `receiver_id`, `total`, `status`,
 (13, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:24:28'),
 (14, NULL, NULL, 19000, 'Completed', 'No', 1, '2021-06-16 16:27:05'),
 (15, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:48:17'),
-(16, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:49:04');
+(16, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-16 16:49:04'),
+(17, NULL, NULL, 8000, 'Completed', 'No', 7, '2021-06-17 11:20:38'),
+(18, NULL, NULL, 6000, 'Completed', 'No', 7, '2021-06-17 11:50:26'),
+(19, NULL, NULL, 150, 'Completed', 'No', 1, '2021-06-17 13:14:04'),
+(20, NULL, NULL, 152000, 'Completed', 'No', 1, '2021-06-17 15:57:10'),
+(21, NULL, NULL, 38000, 'Completed', 'No', 1, '2021-06-17 15:57:45');
 
 -- --------------------------------------------------------
 
@@ -375,7 +428,7 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` timestamp NULL DEFAULT current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
@@ -386,11 +439,16 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `phone`, `image`, `role`, `status`, `date`, `created_at`, `updated_at`) VALUES
-(1, 'Basil', 'basil@gmail.com', NULL, '$2y$10$8UVo3SVELC2yc5N09EtcvOAXstHmJ1sCKHDE3UOtQ72WP/eQsT.1u', NULL, NULL, NULL, NULL, NULL, '2021-05-28 13:21:42', '2021-05-28 05:42:58', '2021-05-28 05:42:58'),
-(6, 'Rashid', 'rashid@digitalsquare.us', NULL, '$2y$10$zhlevY1T.7ScGcb01tgg0.KrxYGiCiiVV/mdk1cxaUw3etQDsgp0m', NULL, '03313817104', NULL, 'User', 'Active', '2021-06-01 12:08:03', '2021-06-01 07:08:03', '2021-06-01 07:08:03'),
-(7, 'adsf', 'rashidabbasi17@gmail.com', NULL, '$2y$10$RKbPW.wXLT2T2zvlJFcDJuG33sIkQP..eH8Y.BTEKoqOySiq0sWGS', NULL, '03313817104', NULL, 'User', 'Active', '2021-06-01 12:26:39', '2021-06-01 07:26:39', '2021-06-01 07:26:39'),
-(8, 'Kamran Arshad', 'kamranarshad@gmail.com', NULL, '$2y$10$lHzqYZM9X1EoGkulPMbUW.9dRakOGvzUZH0py1YAy0o28trb5kUQe', NULL, '03313817104', NULL, 'User', 'Active', '2021-06-02 13:39:29', '2021-06-02 08:39:29', '2021-06-02 08:39:29');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `phone`, `image`, `parent_id`, `status`, `date`, `created_at`, `updated_at`) VALUES
+(1, 'Basil', 'basil@gmail.com', NULL, '$2y$10$8UVo3SVELC2yc5N09EtcvOAXstHmJ1sCKHDE3UOtQ72WP/eQsT.1u', 'mE9a5qv7Q5vo84UASXqzJAX33JHxdtA9wThone5M8u8qEyZ1a7Ujsn4uJd80', NULL, NULL, 1, 'Active', '2021-05-28 13:21:42', '2021-05-28 05:42:58', '2021-05-28 05:42:58'),
+(6, 'Rashid', 'rashid@digitalsquare.us', NULL, '$2y$10$zhlevY1T.7ScGcb01tgg0.KrxYGiCiiVV/mdk1cxaUw3etQDsgp0m', NULL, '03313817104', NULL, 0, 'Active', '2021-06-01 12:08:03', '2021-06-01 07:08:03', '2021-06-01 07:08:03'),
+(7, 'adsf', 'rashidabbasi17@gmail.com', NULL, '$2y$10$RKbPW.wXLT2T2zvlJFcDJuG33sIkQP..eH8Y.BTEKoqOySiq0sWGS', NULL, '03313817104', NULL, 0, 'Active', '2021-06-01 12:26:39', '2021-06-01 07:26:39', '2021-06-01 07:26:39'),
+(8, 'Kamran Arshad', 'kamranarshad@gmail.com', NULL, '$2y$10$lHzqYZM9X1EoGkulPMbUW.9dRakOGvzUZH0py1YAy0o28trb5kUQe', NULL, '03313817104', NULL, 0, 'Active', '2021-06-02 13:39:29', '2021-06-02 08:39:29', '2021-06-02 08:39:29'),
+(9, 'Uzair', 'uzair@gmail.con', NULL, '$2y$10$71dBJxZxWQ/v2CfF/Stb5O3ftAQvV0lhHARnQMnX6LbCkSLmSaKP6', NULL, '5453454', 'Users/Products/rTUKCIQEIMoRadxGHmx9KjFlOUogp3InT2McRz9T.png', 0, 'Active', '2021-06-18 13:03:40', '2021-06-18 08:03:40', '2021-06-18 08:03:40'),
+(10, 'Bilal', 'bilal@gmail.com', NULL, '$2y$10$B3G93EowKmQ8T3j64Ab4A.b181EY4IqsLtDQDmYsX9VBX.MY9/gDa', NULL, '2123153', 'Users/Products/mlxDNccnsZjCvGBhB5VD86hVQ6VPLJaWa3jUkgHI.png', 0, 'Active', '2021-06-18 13:44:39', '2021-06-18 08:44:39', '2021-06-18 08:44:39'),
+(11, 'Hello', 'hello@gmail.com', NULL, '$2y$10$PfqZaoQnXWgsIhpWp.yBS.rDbBx07mPPpo4Dw1/WDmdRM5yTnJtj6', NULL, '5453454', 'Users/Products/51oIkJg3CwKNc26MKKW8r8jvQKjFb1PrzluUaFSi.png', 1, 'Active', '2021-06-18 13:48:12', '2021-06-18 08:48:12', '2021-06-18 08:48:12'),
+(12, 'osama', 'osama@mgail.com', NULL, '$2y$10$AOwPcC.457nQvFDEoH.gI.xF08SStOC0EqQ2yb6eZfOcKa65CLc6e', NULL, '134342341', NULL, 1, 'Active', '2021-06-18 15:31:27', '2021-06-18 10:31:27', '2021-06-18 10:31:27'),
+(13, 'User', 'user@gmail.com', NULL, '$2y$10$0T97fpXEhlWv.QjFlrKLNOXdjdMGqJwx3elpadvI05PhERq69120G', NULL, '51534453', NULL, 1, 'Active', '2021-06-18 16:19:34', '2021-06-18 11:19:34', '2021-06-18 11:19:34');
 
 --
 -- Indexes for dumped tables
@@ -468,6 +526,20 @@ ALTER TABLE `product_sales`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- Indexes for table `role_users`
+--
+ALTER TABLE `role_users`
+  ADD PRIMARY KEY (`role_user_id`),
+  ADD KEY `role_id` (`role_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
@@ -517,7 +589,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `discounts`
@@ -547,19 +619,31 @@ ALTER TABLE `outlets`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `product_sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `product_sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `role_users`
+--
+ALTER TABLE `role_users`
+  MODIFY `role_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -577,7 +661,7 @@ ALTER TABLE `shopkeepers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -627,6 +711,13 @@ ALTER TABLE `products`
 ALTER TABLE `product_sales`
   ADD CONSTRAINT `product_sales_ibfk_1` FOREIGN KEY (`sale_id`) REFERENCES `sales` (`sale_id`),
   ADD CONSTRAINT `product_sales_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `role_users`
+--
+ALTER TABLE `role_users`
+  ADD CONSTRAINT `role_users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
+  ADD CONSTRAINT `role_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `sales`

@@ -470,6 +470,12 @@
                             <span class="mm-text ">Dashboard</span>
                         </a>
                     </li>
+                    <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/user') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/user/update') {echo "active";} ?>">
+                        <a href="{{action('UserController@index')}}">
+                            <i class="menu-icon fa fa-fw fa-users"></i>
+                            <span class="mm-text ">All users</span>
+                        </a>
+                    </li>
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/customer') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/customer/update') {echo "active";} ?>">
                         <a href="{{action('CustomerController@index')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
@@ -510,8 +516,9 @@
                 <!-- / .navigation --> </div>
             <!-- menu --> </section>
         <!-- /.sidebar --> </aside>
-    @yield('master_body')
+   
     <!-- /.right-side --> 
+     @yield('master_body')
 </div>
 <!-- ./wrapper -->
 <!-- global js -->

@@ -136,6 +136,25 @@ $(document).ready(function () {
             }
         }
     });
+
+    var granimInstance5 = new Granim({
+        element: '#canvas-interactive5',
+        name: 'interactive-gradient5',
+        elToSetClassOn: '.canvas-interactive-wrapper5',
+        direction: 'diagonal',
+        opacity: [1, 1],
+        isPausedWhenNotInView: true,
+        states: {
+            "default-state": {
+                gradients: [
+                    ['#834d9b', '#d04ed6'],
+                    ['#1CD8D2', '#93EDC7']
+                ],
+                transitionSpeed: 12000
+            }
+        }
+    });
+
     // top sales visits and income widgets gradient ends
 
 

@@ -34,6 +34,18 @@ class ProductController extends Controller
 
     public function submit(Request $req)
     {
+
+    	$product2 = Product::where('user_id', Auth::User()->id)
+    	->where('is_deleted', 'No')
+    	->get();
+
+    	foreach ($product2 as $obj) {
+    		if($obj->name == $req->name && $obj->category_id == $req->category_id)
+    		{
+    			return redirect()->back();
+    		}
+    	}
+
     	$product = new Product();
     	$product->name = $req->name;
     	$product->category_id = $req->category_id;
@@ -71,7 +83,7 @@ class ProductController extends Controller
 	    	;
 		}
     }
-
+    
     public function update(Request $req)
     {
     	if($req->image)
@@ -90,7 +102,7 @@ class ProductController extends Controller
 		    	"s_price" => $req->s_price,
 		    	"status" => $req->status,
 	    	]);
-
+            
 	    	$category = Category::where('user_id', Auth::User()->id)
 	    	->where('is_deleted','No')
 	    	->get();
@@ -104,7 +116,7 @@ class ProductController extends Controller
 	    	->with('status',"Updated")
 	    	;
     	}
-
+        
     	$product = Product::where(["product_id"=>$req->product_id])->update([
     		"name" => $req->name,
 	    	"category_id" => $req->category_id,
@@ -118,7 +130,7 @@ class ProductController extends Controller
 	    	"s_price" => $req->s_price,
 	    	"status" => $req->status,
     	]);
-
+        
     	if($product)
     	{
     		$category = Category::where('user_id', Auth::User()->id)
@@ -134,10 +146,10 @@ class ProductController extends Controller
 	    	->with('status',"Updated")
 	    	;
     	}
-
+        
     }
-
-
+    
+    
     public function delete(Request $req)
     {
     	$product = Product::where(["product_id"=>$req->product_id])->update([

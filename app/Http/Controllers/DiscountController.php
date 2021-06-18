@@ -25,15 +25,15 @@ class DiscountController extends Controller
     	->with('status',"0");
     	;
     }
-
+    
     public function submit(Request $req)
     {
-
+        
         $discount2 = Discount::where('user_id', Auth::User()->id)
         ->where('is_deleted', 'No')
         ->orderBy('discount_id')
         ->get();
-
+        
         foreach($discount2 as $obj)
         {
             if($obj->name == $req->name)
@@ -41,7 +41,7 @@ class DiscountController extends Controller
                 return redirect()->back();
             }
         }
-
+        
     	$discount = new Discount();
     	$discount->name = $req->name;
     	$discount->percent = $req->percent;
@@ -60,7 +60,7 @@ class DiscountController extends Controller
 	    	->with('status',"Submitted");
 		}
     }
-
+    
     public function update(Request $req)
     {
         $discount2 = Discount::where('user_id', Auth::User()->id)

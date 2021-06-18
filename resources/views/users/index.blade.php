@@ -3,7 +3,7 @@
 
 <!-- DROPDOWN CSS -->
 
-    <link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/vendors/bootstrap-multiselect/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/vendors/bootstrap-multiselect/css/bootstrap-multiselect.css" >
     <link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/vendors/select2/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/vendors/select2/css/select2-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/vendors/selectize/css/selectize.css">
@@ -18,7 +18,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                List of All Categories / Brands
+                List of All Users
             </h1>
             <ol class="breadcrumb">
                 <li>
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    Categories / Brands
+                    Users
                 </li>
                 
             </ol>
@@ -40,13 +40,13 @@
                     <div class="card border-primary filterable">
                         <div class="card-header bg-primary text-white">
                             <h3 class="card-title">
-                                <i class="fa fa-fw fa-users"></i> All Categories / Brands
+                                <i class="fa fa-fw fa-users"></i> All Users
                             </h3>
                         </div>
                         <div class="card-body">
                         	<span class="btn btn-success float-right mr-3" data-toggle="modal" data-target="#formModal">
 	                            <i class="fa fa-plus"></i>
-	                            <span>Add Categories / Brands</span>
+	                            <span>Add User</span>
                             </span>
 
 <!-- Modal -->
@@ -55,50 +55,107 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title mt-0" id="myModalLabel">Add Category</h4>
+                <h4 class="modal-title mt-0" id="myModalLabel">Add User</h4>
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true">×
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-validation3" action="{{action('CategoryController@submit')}}" method="post" enctype="multipart/form-data">
+                <form id="form-validation3" action="{{action('UserController@submit')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-6 offset-3">
+                        <div class="col-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <input type="text" name="name"
                                        id="modalfirst_name"
                                        class="form-control input-md"
-                                       placeholder="Customer Name" tabindex="1"
+                                       placeholder="Name" tabindex="1"
                                        data-error="First name must be entered"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="tel" name="phone"
+                                       id="modallast_name"
+                                       class="form-control input-md"
+                                       placeholder="Phone" tabindex="2"
+                                       data-error="Last name must be entered"
                                        required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                    	<div class="col-12 col-sm-6 col-md-6 offset-3">
-                            <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" name="email"
+                                       class="form-control input-md"
+                                       placeholder="Email Address" tabindex="4"
+                                       data-error="that email address is invalid"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="password"
+                                       id="display_name"
+                                       class="form-control input-md"
+                                       placeholder="Password" tabindex="3"
+                                       data-error="Username must be enetered"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <select id="" name="role" class="form-control select2" style="width:100%" required="">
+                                    <option value="">Select Role</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-12 col-sm-6 col-md-6">
+                    		<div class="form-group row">
                                 <div class="col-md-12">
                                     <h5>Select Image</h5>
                                     <div class="">
                                         <input type="file" id="imgUpload" name="image" class="dropify">
-                                        <!-- <div class="dropify-message"><span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong happended.</p></div><div class="dropify-loader"></div><div class="dropify-errors-container"><ul></ul></div><input type="file" class="dropify"><button type="button" class="dropify-clear">Remove</button><div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="dropify-filename-inner"></span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div> -->
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-left">
                                     <img id="imgPreview" style="width: 100px !important;">
                                 </div>
                             </div>
+                    	</div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group row">
+                                <!-- SELECT DROPDOWN -->
+                                <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <select id="" name="status" class="form-control select2" style="width:100%" required="">
+                                            <option value="">Select Status</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                              <!-- END OF SELECT DROPDOWN -->
-                        <div class="col-md-6 text-left offset-3">
-                            <input type="submit" id="btncheck" value="Add Category / Brand"
+                                <!-- END OF SELECT DROPDOWN -->
+                            </div>
+                            <input type="submit" id="btncheck" value="Add Customer"
                                    class="btn btn-primary btn-block btn-md btn-responsive"
                                    tabindex="7" style="color: white;">
                         </div>
+                    	
                     </div>
                     <!-- <div class="row marginTop">
                         <div class="col-6 col-md-6">
@@ -120,94 +177,149 @@
 
 
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered"   id="table2">
+                                <table class="table table-striped table-bordered" id="table2">
                                     <thead>
                                     <tr>
                                         <th class="text-center">Id</th>
                                         <th class="text-center">Name</th>
-                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">Phone</th>
                                         <th class="text-center">Image</th>
+                                        <th class="text-center">Role</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Date</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
-                                @foreach($category as $obj)
+                                @foreach($users as $obj)
                                     <tr>
-                                        <td class="text-center" style="vertical-align: middle;">{{$obj->category_id}}</td>
-                                        <td class="text-center" style="vertical-align: middle;">
-                                            {{$obj->name}}
-                                        </td>
-                                        <td class="text-center" style="vertical-align: middle;">
-                                            @if($obj->date != null)
-                                                {{date('d-m-Y', strtotime( $obj->date ))}}
-                                                @else
-                                                {{'-'}}
-                                            @endif
-
-                                        </td>
+                                        <td class="text-center" style="vertical-align: middle;">{{$obj->id}}</td>
+                                        <td class="text-center" style="vertical-align: middle;">{{$obj->name}}</td>
+                                        <td class="text-center" style="vertical-align: middle;">{{$obj->email}}</td>
+                                        <td class="text-center" style="vertical-align: middle;">{{$obj->phone}}</td>
                                         <td class="text-center" style="vertical-align: middle;">
                                             @if($obj->image != null)
-                                                <img src="{{asset('storage/'.$obj->image)}}" width="70"></td>
+                                                <img src="{{asset('storage/'.$obj->image)}}" width="70">
                                                 @else
                                                 {{'-'}}
                                             @endif
+                                        </td>
                                         <td class="text-center" style="vertical-align: middle;">
-                                            <button class="btn btn-primary btn-xs edit_modal" data-toggle="modal" data-target="#formModalEdit{{$obj->category_id}}" data-placement="top"><span class="fa fa-pencil"></span>
+                                            {{ $obj->role_name }}
+                                        </td>
+                                        <td class="text-center" style="vertical-align: middle;">
+                                            <span class="label label-lg <?php if($obj->status == 'Active') { echo 'bg-success'; } else { echo 'bg-danger'; } ?>" >{{$obj->status}}</span>
+                                        </td>
+                                        <td class="text-center" style="vertical-align: middle;">
+                                            {{date('d-m-Y', strtotime( $obj->date ))}}
+                                        </td>
+                                        <td class="text-center" style="vertical-align: middle;">
+                                            <button class="btn btn-primary btn-xs edit_modal" data-toggle="modal" data-target="#formModalEdit{{$obj->id}}" data-placement="top"><span class="fa fa-pencil"></span>
+                                                <input type="hidden" id="id_span" class="id_span" value="{{$obj->id}}">
                                             </button>
                                             
-<!-- EDIT MODAL FOR CATEGORY -->
 <!-- Modal -->
-<div class="modal fade" id="formModalEdit{{$obj->category_id}}" tabindex="-1" role="dialog"
+<div class="modal fade" id="formModalEdit{{ $obj->id }}" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title mt-0" id="myModalLabel">Edit Category</h4>
+                <h4 class="modal-title mt-0" id="myModalLabel">Add User</h4>
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true">×
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-validation3" action="{{action('CategoryController@update')}}" method="post" enctype="multipart/form-data">
+                <form id="form-validation3" action="{{action('UserController@submit')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-6 offset-3">
+                        <div class="col-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                            	<input type="hidden" name="category_id" value="{{$obj->category_id}}">
                                 <input type="text" name="name"
                                        id="modalfirst_name"
                                        class="form-control input-md"
-                                       placeholder="Customer Name" tabindex="1"
+                                       placeholder="Name" tabindex="1"
                                        data-error="First name must be entered"
                                        required value="{{$obj->name}}">
                             </div>
                         </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="tel" name="phone"
+                                       id="modallast_name"
+                                       class="form-control input-md"
+                                       placeholder="Phone" tabindex="2"
+                                       data-error="Last name must be entered"
+                                       required value="{{ $obj->phone }}">
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
-                    	<div class="col-12 col-sm-6 col-md-6 offset-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" name="email"
+                                       class="form-control input-md"
+                                       placeholder="Email Address" tabindex="4"
+                                       data-error="that email address is invalid"
+                                       required value="{{ $obj->email }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <select id="" name="status" class="form-control select2" style="width:100%" required="">
+                                    <option value="">Select Status</option>
+                                    <option @if($obj->status == 'Active') {{ "selected" }} @endif value="Active">Active</option>
+                                    <option @if($obj->status == 'Inactive') {{ "selected" }} @endif value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <select id="" name="role" class="form-control select2" style="width:100%" required="">
+                                    <option value="">Select Role</option>
+                                    @foreach($roles as $role)
+                                        <option @if($obj->role_id == $role->role_id) {{ "selected" }} @endif value="{{ $role->role_id }}">{{ $role->role_name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <h5>Select Image</h5>
                                     <div class="">
-                                        <input type="file" id="imgUpload2" name="image" class="dropify">
-                                        <!-- <div class="dropify-message"><span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong happended.</p></div><div class="dropify-loader"></div><div class="dropify-errors-container"><ul></ul></div><input type="file" class="dropify"><button type="button" class="dropify-clear">Remove</button><div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="dropify-filename-inner"></span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div> -->
+                                        <input type="file" id="imgUpload" name="image" class="dropify">
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-left">
-                                    <img id="imgPreview2" style="width: 100px !important;">
+                                    <img id="imgPreview" style="width: 100px !important;">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                              <!-- END OF SELECT DROPDOWN -->
-                        <div class="col-md-6 text-left offset-3">
-                            <input type="submit" id="btncheck" value="Update"
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group row">
+                                <!-- SELECT DROPDOWN -->
+                                <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                                <!-- END OF SELECT DROPDOWN -->
+                            </div>
+                            <input type="submit" id="btncheck" value="Add Customer"
                                    class="btn btn-primary btn-block btn-md btn-responsive"
                                    tabindex="7" style="color: white;">
                         </div>
+                        
                     </div>
                     <!-- <div class="row marginTop">
                         <div class="col-6 col-md-6">
@@ -225,10 +337,10 @@
 </div>
 <!-- /.modal -->
 
-<!-- END OF EDIT MODAL -->
+<!-- END OF EDIT MODAL FORM -->
                                             <a onclick="(new PNotify({
                                         title: 'Confirmation Needed',
-                                        text: 'This category can have many products once you delete all the products belongs to this category will auto deleted !',
+                                        text: 'Are you sure?',
                                         icon: 'fa fa-question-circle',
                                         type:'success',
                                         hide: false,
@@ -243,7 +355,7 @@
                                             history: false
                                         }
                                     })).get().on('pnotify.confirm', function(){
-                                        window.location.href = '{{action('CategoryController@delete')}}?category_id={{$obj->category_id}}';
+                                        window.location.href = '{{action('CustomerController@delete')}}?user_id={{$obj->id}}';
                                     }).on('pnotify.cancel', function(){
                                         
                                     });" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>
@@ -283,6 +395,9 @@
 
 <!-- end of global js -->
 
+<script type="text/javascript" src="{{asset('DashboardAssets')}}/vendors/dropify/js/dropify.js"></script>
+
+<script src="{{asset('DashboardAssets')}}/js/custom_js/dropify_custom.js" type="text/javascript"></script>
 
 <!-- begining of page level js -->
 <script type="text/javascript" src="{{asset('DashboardAssets')}}/vendors/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
@@ -306,9 +421,9 @@
 <script type="text/javascript" src="{{asset('DashboardAssets')}}/vendors/pnotify/js/pnotify.desktop.js"></script>
 <script type="text/javascript" src="{{asset('DashboardAssets')}}/vendors/pnotify/js/pnotify.history.js"></script>
 <script type="text/javascript" src="{{asset('DashboardAssets')}}/vendors/pnotify/js/pnotify.callbacks.js"></script>
-
+<!-- <script src="{{asset('DashboardAssets')}}/js/custom_js/notifications.js"></script> -->
 <!-- end of page level js -->
-<script src="{{asset('DashboardAssets')}}/vendors/granim/js/granim.min.js" type="text/javascript"></script>
+
 </body>
 
 
@@ -329,7 +444,7 @@ $(document).ready(function(){
     {
         ?>
         new PNotify({
-                title: 'Great! You have added a category',
+                title: 'Great! You have added a customer',
                 title_escape: true,
                 type: 'success',
                 text: $('#evil_html').html(),
