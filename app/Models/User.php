@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     public $table = 'users';
 
+    public $timestamps = false;
+
     use HasFactory, Notifiable;
 
     /**

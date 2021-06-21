@@ -14,14 +14,38 @@ class ProductController extends Controller
 	public function __construct()
     {
         $this->middleware('auth');
+
+        $this->middleware('admin');
+
+        $this->middleware('manager');
     }
 
     public function index()
     {
+        $users = DB::table('users')
+        ->join('role_users','role_users.user_id','=','users.id')
+        ->join('roles','roles.role_id','=','role_users.role_id')
+        ->where('users.id', Auth::user()->id)
+        ->first();
+
+        $child_users = DB::table('users')
+        ->where('users.parent_id', $users->parent_id)
+        ->get();
+
     	$category = Category::where('user_id', Auth::User()->id)
+        ->orWhere('user_id', $users->parent_id)
     	->where('is_deleted','No')
+
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+
     	->get();
     	$product = Product::where('user_id', Auth::User()->id)
+        ->orWhere('user_id', $users->parent_id)
     	->where('is_deleted','No')
     	->orderBy('product_id')
     	->get();
@@ -69,12 +93,36 @@ class ProductController extends Controller
 
 		if($product->save())
 		{
+            $users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
 			$category = Category::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
 	    	->where('is_deleted','No')
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
 	    	->get();
 	    	$product = Product::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
 	    	->where('is_deleted','No')
 	    	->orderBy('product_id')
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
 	    	->get();
 	    	return view('products.index')
 	    	->with('product',$product)
@@ -86,6 +134,16 @@ class ProductController extends Controller
     
     public function update(Request $req)
     {
+        $users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
     	if($req->image)
     	{
     		$product = Product::where(["product_id"=>$req->product_id])->update([
@@ -104,11 +162,27 @@ class ProductController extends Controller
 	    	]);
             
 	    	$category = Category::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
 	    	->where('is_deleted','No')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
 	    	->get();
 	    	$product = Product::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
 	    	->where('is_deleted','No')
 	    	->orderBy('product_id')
+            
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
 	    	->get();
 	    	return view('products.index')
 	    	->with('product',$product)
@@ -134,11 +208,25 @@ class ProductController extends Controller
     	if($product)
     	{
     		$category = Category::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
 	    	->where('is_deleted','No')
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
 	    	->get();
 	    	$product = Product::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
 	    	->where('is_deleted','No')
 	    	->orderBy('product_id')
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
 	    	->get();
 	    	return view('products.index')
 	    	->with('product',$product)

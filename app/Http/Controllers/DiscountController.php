@@ -12,13 +12,36 @@ class DiscountController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->middleware('admin');
+
+        $this->middleware('manager');
     }
 
     public function index()
     {
+         $users = DB::table('users')
+        ->join('role_users','role_users.user_id','=','users.id')
+        ->join('roles','roles.role_id','=','role_users.role_id')
+        ->where('users.id', Auth::user()->id)
+        ->first();
+
+        $child_users = DB::table('users')
+        ->where('users.parent_id', $users->parent_id)
+        ->get();
+
     	$discount = Discount::where('user_id', Auth::User()->id)
+        ->orWhere('user_id', $users->parent_id)
     	->where('is_deleted', 'No')
     	->orderBy('discount_id','desc')
+
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+
     	->get();
     	return view('discounts.index')
     	->with('discount',$discount)
@@ -28,10 +51,26 @@ class DiscountController extends Controller
     
     public function submit(Request $req)
     {
+         $users = DB::table('users')
+        ->join('role_users','role_users.user_id','=','users.id')
+        ->join('roles','roles.role_id','=','role_users.role_id')
+        ->where('users.id', Auth::user()->id)
+        ->first();
+
+        $child_users = DB::table('users')
+        ->where('users.parent_id', $users->parent_id)
+        ->get();
         
         $discount2 = Discount::where('user_id', Auth::User()->id)
         ->where('is_deleted', 'No')
         ->orderBy('discount_id')
+        ->orWhere('user_id', $users->parent_id)
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
         ->get();
         
         foreach($discount2 as $obj)
@@ -54,6 +93,13 @@ class DiscountController extends Controller
             $discount = Discount::where('user_id', Auth::User()->id)
             ->where('is_deleted', 'No')
             ->orderBy('discount_id')
+            ->orWhere('user_id', $users->parent_id)
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
             ->get();
 	    	return view('discounts.index')
 	    	->with('discount',$discount)
@@ -63,9 +109,26 @@ class DiscountController extends Controller
     
     public function update(Request $req)
     {
+         $users = DB::table('users')
+        ->join('role_users','role_users.user_id','=','users.id')
+        ->join('roles','roles.role_id','=','role_users.role_id')
+        ->where('users.id', Auth::user()->id)
+        ->first();
+
+        $child_users = DB::table('users')
+        ->where('users.parent_id', $users->parent_id)
+        ->get();
+
         $discount2 = Discount::where('user_id', Auth::User()->id)
         ->where('is_deleted', 'No')
         ->orderBy('discount_id')
+        ->orWhere('user_id', $users->parent_id)
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
         ->get();
 
         foreach($discount2 as $obj)
@@ -87,6 +150,13 @@ class DiscountController extends Controller
     		$discount = Discount::where('user_id', Auth::User()->id)
 	    	->where('is_deleted', 'No')
 	    	->orderBy('discount_id')
+            ->orWhere('user_id', $users->parent_id)
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
 	    	->get();
 	    	return view('discounts.index')
 	    	->with('discount',$discount)
@@ -99,7 +169,7 @@ class DiscountController extends Controller
     	$discount = Discount::where(["discount_id"=>$req->discount_id])->update([
     		"is_deleted" => "Yes"
     	]);
-
+        
     	if($discount)
     	{
 			return redirect()->action('DiscountController@index');

@@ -44,9 +44,9 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                        	<span class="btn btn-success float-right mr-3" data-toggle="modal" data-target="#formModal">
-	                            <i class="fa fa-plus"></i>
-	                            <span>Add User</span>
+                            <span class="btn btn-success float-right mr-3" data-toggle="modal" data-target="#formModal">
+                                <i class="fa fa-plus"></i>
+                                <span>Add User</span>
                             </span>
 
 <!-- Modal -->
@@ -61,7 +61,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-validation3" action="{{action('UserController@submit')}}" method="post" enctype="multipart/form-data">
+                <form id="form-validation3" action="{{action('UserController@submit_admin')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-6">
@@ -109,19 +109,17 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select id="" name="role" class="form-control select2" style="width:100%" required="">
-                                    <option value="">Select Role</option>
-                                    @foreach($roles as $role)
-                                        <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
-                                    @endforeach
-
+                                <select id="" name="status" class="form-control select2" style="width:100%" required="">
+                                    <option value="">Select Status</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                    	<div class="col-12 col-sm-6 col-md-6">
-                    		<div class="form-group row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group row">
                                 <div class="col-md-12">
                                     <h5>Select Image</h5>
                                     <div class="">
@@ -132,21 +130,12 @@
                                     <img id="imgPreview" style="width: 100px !important;">
                                 </div>
                             </div>
-                    	</div>
+                        </div>
                         <div class="col-12 col-sm-6 col-md-6">
                             <div class="form-group row">
                                 <!-- SELECT DROPDOWN -->
                                 <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <select id="" name="status" class="form-control select2" style="width:100%" required="">
-                                            <option value="">Select Status</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Inactive">Inactive</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                                 <!-- END OF SELECT DROPDOWN -->
@@ -155,7 +144,7 @@
                                    class="btn btn-primary btn-block btn-md btn-responsive"
                                    tabindex="7" style="color: white;">
                         </div>
-                    	
+                        
                     </div>
                     <!-- <div class="row marginTop">
                         <div class="col-6 col-md-6">
@@ -279,15 +268,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-6">
-                            <div class="form-group">
-                                <select id="" name="role" class="form-control select2" style="width:100%" required="">
-                                    <option value="">Select Role</option>
-                                    @foreach($roles as $role)
-                                        <option @if($obj->role_id == $role->role_id) {{ "selected" }} @endif value="{{ $role->role_id }}">{{ $role->role_name }}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="row">

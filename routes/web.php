@@ -62,5 +62,12 @@ Route::get('/pos','SaleController@pos');
 Route::post('/generate-sales','SaleController@generate_sales');
 
 // USER
-Route::get('/user','UserController@index');
-Route::post('/user', 'UserController@submit');
+Route::get('/user','UserController@index')->middleware('admin');
+Route::post('/user', 'UserController@submit')->middleware('admin');
+Route::post('/user/update','UserController@update')->middleware('admin');
+Route::get('/user/delete','UserController@delete');
+
+// SUPER ADMIN
+Route::get('/admin_user', 'UserController@view_admin')->middleware('superadmin');
+Route::post('/admin_user', 'UserController@submit_admin')->middleware('superadmin');
+Route::post('/admin_user/update', 'UserController@update_admin')->middleware('superadmin');

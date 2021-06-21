@@ -473,7 +473,13 @@
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/user') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/user/update') {echo "active";} ?>">
                         <a href="{{action('UserController@index')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
-                            <span class="mm-text ">All users</span>
+                            <span class="mm-text ">All users for Admin</span>
+                        </a>
+                    </li>
+                    <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/admin_user') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/admin_user/update') {echo "active";} ?>">
+                        <a href="{{action('UserController@view_admin')}}">
+                            <i class="menu-icon fa fa-fw fa-users"></i>
+                            <span class="mm-text ">All users for Super Admin</span>
                         </a>
                     </li>
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/customer') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/customer/update') {echo "active";} ?>">

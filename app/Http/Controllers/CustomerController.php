@@ -14,8 +14,10 @@ class CustomerController extends Controller
 	public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+        $this->middleware('manager');
     }
-
+    
     public function index()
     {
 
@@ -30,15 +32,17 @@ class CustomerController extends Controller
         ->get();
 
     	$customer = Customer::orWhere('user_id', Auth::User()->id)
-        ->orWhere('user_id', $users->parent_id)
+        
         ->where('is_deleted','No')
     	->orderBy('customer_id', 'desc')
-        ->orWhere('user_id', function($query) use($child_users)
-            {
-                foreach ($child_users as $obj) {
-                    $query->orWhere('user_id', $obj->id);
-                }
-            })
+        ->orWhere('user_id', $users->parent_id)
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+
     	->get();
 
     	return view('customers.index')
@@ -81,14 +85,34 @@ class CustomerController extends Controller
         
 		if($customer->save())
 		{
-			$customer = Customer::where('user_id', Auth::User()->id)
-			->where('is_deleted','No')
-			->orderBy('customer_id')
-			->get();
-			return view('customers.index')
-			->with('customer',$customer)
-			->with('status',"Submitted")
-			;
+			$users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
+            $customer = Customer::orWhere('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted','No')
+            ->orderBy('customer_id', 'desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            
+            ->get();
+
+            return view('customers.index')
+            ->with('customer',$customer)
+            ->with('status',"Submitted")
+            ;
 		}
     }
     
@@ -108,14 +132,34 @@ class CustomerController extends Controller
 		    	"status" => $req->status
     		]);
 
-    		$customer = Customer::where('user_id', Auth::User()->id)
-			->where('is_deleted','No')
-			->orderBy('customer_id')
-			->get();
-			return view('customers.index')
-			->with('customer',$customer)
-			->with('status',"Updated")
-			;
+    		$users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
+            $customer = Customer::orWhere('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted','No')
+            ->orderBy('customer_id', 'desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+
+            ->get();
+
+            return view('customers.index')
+            ->with('customer',$customer)
+            ->with('status',"Updated")
+            ;
 
     	}
 
@@ -132,14 +176,35 @@ class CustomerController extends Controller
 
     	if($customer)
     	{
-    		$customer = Customer::where('user_id', Auth::User()->id)
-			->where('is_deleted','No')
-			->orderBy('customer_id')
-			->get();
-			return view('customers.index')
-			->with('customer',$customer)
-			->with('status',"Updated")
-			;
+    		$users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
+            $customer = Customer::orWhere('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted','No')
+            ->orderBy('customer_id', 'desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+
+            ->get();
+
+            return view('customers.index')
+            ->with('customer',$customer)
+            ->with('status',"Updated")
+            ;
+            
     	}
     }
 

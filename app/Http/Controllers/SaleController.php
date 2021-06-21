@@ -20,9 +20,28 @@ class SaleController extends Controller
 
     public function index()
     {
+        $users = DB::table('users')
+        ->join('role_users','role_users.user_id','=','users.id')
+        ->join('roles','roles.role_id','=','role_users.role_id')
+        ->where('users.id', Auth::user()->id)
+        ->first();
+
+        $child_users = DB::table('users')
+        ->where('users.parent_id', $users->parent_id)
+        ->get();
+
     	$sale = Sale::where('user_id', Auth::User()->id)
     	->where('is_deleted', 'No')
     	->orderBy('sale_id','desc')
+
+        ->orWhere('user_id', $users->parent_id)
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+        
     	->get();
     	return view('sales.index')
     	->with('sale',$sale)
@@ -42,9 +61,28 @@ class SaleController extends Controller
 
     public function pos_category()
     {
+        $users = DB::table('users')
+        ->join('role_users','role_users.user_id','=','users.id')
+        ->join('roles','roles.role_id','=','role_users.role_id')
+        ->where('users.id', Auth::user()->id)
+        ->first();
+
+        $child_users = DB::table('users')
+        ->where('users.parent_id', $users->parent_id)
+        ->get();
+
     	$category = Category::where('user_id', Auth::User()->id)
     	->where('is_deleted', 'No')
     	->orderBy('category_id','desc')
+
+        ->orWhere('user_id', $users->parent_id)
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+
     	->get();
     	return view('sales.pos_category')
     	->with('category',$category)
