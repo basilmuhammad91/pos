@@ -15,4 +15,10 @@ class Product extends Model
     {
     	return $this->hasOne('App\Models\Category','category_id','category_id');
     }
+
+    public function discount()
+    {
+    	return $this->hasOne('App\Models\Discount', 'discount_id', 'discount_id');
+    }
+
 }

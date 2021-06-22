@@ -17,6 +17,7 @@ class ManagerMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+    
     public function handle(Request $request, Closure $next)
     {
          $users = DB::table('users')
@@ -25,7 +26,7 @@ class ManagerMiddleware
         ->where('users.id', Auth::user()->id)
         ->first();
 
-        if($users->role_name == 'Manager')
+        if($users->role_name == 'Manager' || $users->role_name == 'Admin')
         {
             return $next($request);
         }

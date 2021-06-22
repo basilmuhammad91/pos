@@ -31,7 +31,7 @@ class MainController extends Controller
         ->join('roles','roles.role_id','=','role_users.role_id')
         ->where('users.id', Auth::user()->id)
         ->first();
-
+        
         $child_users = DB::table('users')
         ->where('users.parent_id', $users->parent_id)
         ->get();
@@ -62,10 +62,26 @@ class MainController extends Controller
         $customer = Customer::where('user_id', Auth::User()->id)
             ->where('is_deleted','No')
             ->orderBy('customer_id')
+            ->orWhere('user_id', $users->parent_id)
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
             ->get();
+
         $all_sale = Sale::where('is_deleted', 'No')
         ->where('user_id', Auth::user()->id)
+        ->orWhere('user_id', $users->parent_id)
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
         ->get();
+        
         $total_customer = $customer->count();
         $total_sale = $all_sale->count();
 
@@ -88,6 +104,7 @@ class MainController extends Controller
         ->with('total_profit', $total_profit)
         ->with('total_today_sale', $total_today_sale)
         ->with('total_products', $total_products)
+        ->with('role_name', $users->role_name)
         ;
     }
 

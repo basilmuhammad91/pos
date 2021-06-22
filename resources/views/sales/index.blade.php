@@ -211,7 +211,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
+                                        
                                 @foreach($sale as $obj)
                                     <tr>
                                         <td class="text-center" style="vertical-align: middle;">{{$obj->sale_id}}</td>

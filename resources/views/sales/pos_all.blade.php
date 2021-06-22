@@ -1,7 +1,6 @@
 @extends('layouts.master_dashboard')
 
 @section('master_body')
-
 <?php
 
 $blade_users = DB::table('users')
@@ -44,10 +43,6 @@ $blade_users = DB::table('users')
 
 	<link type="text/css" href="css/tab.css" rel="stylesheet">
 <!--end of page level css-->
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 
 <style type="text/css">
 
@@ -118,7 +113,6 @@ $blade_users = DB::table('users')
                                     </div>
                                 </div>
                                 @endif
-
 <!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -223,7 +217,7 @@ $blade_users = DB::table('users')
                                     <select id="" name="category_id" class="form-control select2" style="width:100%" required="">
                                         <option value="">Select value...</option>
                                         @foreach($all_category as $obj)
-                                            <option @if($obj->category_id == $category->category_id) {{ 'selected' }} @endif value="{{$obj->category_id}}">{{$obj->name}}</option>
+                                            <option value="{{$obj->category_id}}">{{$obj->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -290,7 +284,7 @@ $blade_users = DB::table('users')
 <!-- /.modal -->
 
                                 <div class="row">
-                                    @foreach($category->product->where('status','Active') as $obj)
+                                    @foreach($products->where('status','Active') as $obj)
                                     <div class="col-md-3 col-lg-2 col-sm-4 text-center mb-3 mt-5">
                                         <div class="text-center" style="margin: auto;">
                                             <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_{{ $obj->product_id }}" onclick="myFunction('{{$obj->name}}', {{$obj->product_id }}, {{ $obj->s_price }});" >
@@ -371,7 +365,6 @@ $blade_users = DB::table('users')
             <!-- Second Table End -->
         </section>
     </aside>
-
 <!-- wrapper-->
 <!-- global js -->
 <!-- <script src="{{asset('DashboardAssets')}}/js/app.js" type="text/javascript"></script> -->
@@ -558,12 +551,10 @@ $("#imgUpload2").change(function(){
         myArr.forEach(function(item){
             grand_total += item.price*item.quantity;
             // invoice_div.innerHTML += item.id+" - "+item.quantity+" - "+item.price+" - "+item.quantity*item.price+"<br>";
-            invoice_div.innerHTML += '<div class="row sub-invoice text-left mx-2 my-2 px-1 py-2" id="invoice-row"><div class="col-12"></div><div class="col-8 mt-2"><b><h4>'+item.name+'</h4><input type="hidden" name="product_id[]" value="'+item.id+'" /></b></div><div class="col-4 text-right"><span class="float-right close_btn" id="close_btn" style="cursor: pointer;"><i class="fa fa-fw fa-times-circle"></i></span><br><h5 style="margin: 0; padding: 0; ">'+item.quantity*item.price+'</h5></div><div class="col-12"><span><i class="fa fa-fw fa-plus-circle increase_quantity"></i> <span class="quantity_value">'+item.quantity+'</span><input type="hidden" name="quantity[]" value="'+item.quantity+'" /> Unit(s) </span><span class="mr-3"><i class="fa fa-fw fa-minus-circle"></i>'+item.price+'  per unit</span><input type="hidden" name="price[]" value="'+item.quantity*item.price+'" /></div></div>';
+            invoice_div.innerHTML += '<div class="row sub-invoice text-left mx-2 my-2 px-1 py-2" id="invoice-row"><div class="col-12"></div><div class="col-8 mt-2"><b><h4>'+item.name+'</h4><input type="hidden" name="product_id[]" value="'+item.id+'" /></b></div><div class="col-4 text-right"><span class="float-right close_btn" id="close_btn" style="cursor: pointer;"><i class="fa fa-fw fa-times-circle"></i></span><br><h5 style="margin: 0; padding: 0; ">'+item.quantity*item.price+'</h5></div><div class="col-12"><span><i class="fa fa-fw fa-plus-circle"></i> <span>'+item.quantity+'</span><input type="hidden" name="quantity[]" value="'+item.quantity+'" /> Unit(s) </span><span class="mr-3"><i class="fa fa-fw fa-minus-circle"></i>'+item.price+'  per unit</span><input type="hidden" name="price[]" value="'+item.quantity*item.price+'" /></div></div>';
         });
     }
-
-    $(document).ready(function() {  
-        $('.js-example-basic-single').select2();
-    });
-
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
 </script>

@@ -151,7 +151,7 @@
                         </div>
                                 <!-- END OF SELECT DROPDOWN -->
                             </div>
-                            <input type="submit" id="btncheck" value="Add Customer"
+                            <input type="submit" id="btncheck" value="Add User"
                                    class="btn btn-primary btn-block btn-md btn-responsive"
                                    tabindex="7" style="color: white;">
                         </div>

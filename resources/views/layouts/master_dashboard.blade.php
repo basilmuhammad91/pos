@@ -1,4 +1,12 @@
-    
+<?php
+
+$blade_users = DB::table('users')
+->join('role_users','role_users.user_id','=','users.id')
+->join('roles','roles.role_id','=','role_users.role_id')
+->where('users.id', Auth::user()->id)
+->first();
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -116,252 +124,14 @@
         <div class="navbar-collapse " id="navbarNav">
             <div class="navbar-right ml-auto">
                 <ul class="nav navbar-nav ">
-                    <li class="nav-item dropdown messages-menu">
-                        <a href="#" class="nav-link dropdown-toggle"> <i
-                                class="fa fa-fw fa-envelope-o black"></i>
-                            <span class="label bg-success">2</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages table-striped">
-                            <li class="dropdown-title">New Messages</li>
-                            <li class="msg-set message striped-col">
-                                <a href="#" class="">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar7.jpg"
-                                         alt="avatar-image">
-
-                                    <div class="message-body"><strong>Ernest Kerry</strong>
-                                        <br>
-                                        Can we Meet?
-                                        <br>
-                                        <small>Just Now</small>
-                                        <span class="label bg-success label-mini msg-lable">New</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="msg-set message">
-                                <a href="#" class="">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar6.jpg"
-                                         alt="avatar-image">
-
-                                    <div class="message-body"><strong>John</strong>
-                                        <br>
-                                        Dont forgot to call...
-                                        <br>
-                                        <small>5 minutes ago</small>
-                                        <span class="label bg-success label-mini msg-lable">New</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="msg-set message striped-col">
-                                <a href="#" class="">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar5.jpg"
-                                         alt="avatar-image">
-
-                                    <div class="message-body">
-                                        <strong>Wilton Zeph</strong>
-                                        <br>
-                                        If there is anything else &hellip;
-                                        <br>
-                                        <small>14/10/2014 1:31 pm</small>
-                                    </div>
-
-                                </a>
-                            </li>
-                            <li class="msg-set message">
-                                <a href="#" class="">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar1.jpg"
-                                         alt="avatar-image">
-                                    <div class="message-body">
-                                        <strong>Jenny Kerry</strong>
-                                        <br>
-                                        Let me know when you free
-                                        <br>
-                                        <small>5 days ago</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="msg-set message striped-col">
-                                <a href="#" class="">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar.jpg"
-                                         alt="avatar-image">
-                                    <div class="message-body">
-                                        <strong>Tony</strong>
-                                        <br>
-                                        Let me know when you free
-                                        <br>
-                                        <small>5 days ago</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-footer"><a href="#">View All messages</a></li>
-                        </ul>
-
-                    </li>
-                    <!--tasks-->
-                    <li class="nav-item dropdown tasks-menu d-none d-sm-block">
-                        <a href="#" class=" nav-link dropdown-toggle">
-                            <i class="fa fa-fw fa-edit black"></i>
-                            <span class="label bg-primary">4</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li class="dropdown-title ">You Have 4 Tasks</li>
-                            <li class="message striped-col">
-                                <a href="#" class=" ">
-                                    Design some buttons
-                                    <small class="pull-right">20%</small>
-                                    <div class="message-body">
-                                        <div class="progress progress-xs progress_task">
-                                            <div class="progress-bar bg-primary" style="width: 20%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">20% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="message">
-                                <a href="#" class="">
-                                    Create a nice theme
-                                    <small class="pull-right">40%</small>
-                                    <div class="message-body">
-                                        <div class="progress progress-xs progress_task">
-                                            <div class="progress-bar bg-success" style="width: 40%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">40% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="message striped-col">
-                                <a href="#" class="">
-                                    Some task I need to do
-                                    <small class="pull-right">60%</small>
-                                    <div class="message-body">
-                                        <div class="progress progress-xs progress_task">
-                                            <div class="progress-bar bg-danger" style="width: 60%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">60% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="message">
-                                <a href="#" class="">
-                                    Make beautiful transitions
-                                    <small class="pull-right">80%</small>
-                                    <div class="message-body">
-                                        <div class="progress progress-xs progress_task">
-                                            <div class="progress-bar bg-warning" style="width: 80%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">80% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-footer"><a href="#"> View All Tasks</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown_message">
-                        <a href="#" class="nav-link dropdown-toggle toggle-right">
-                            <i class="fa fa-fw fa-comments-o black"></i>
-                            <span class="label bg-danger">9</span>
-                        </a>
-                    </li>
-                    <!-- Notifications: style can be found in dropdown-->
-                    <li class="nav-item dropdown notifications-menu">
-                        <a href="#" class="nav-link dropdown-toggle" >
-                            <i class="fa fa-fw fa-bell-o black"></i>
-                            <span class="label bg-warning">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li class="dropdown-title">You have 8 notifications</li>
-
-                            <li class="message striped-col">
-                                <a href="#" class=" icon-not">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar3.jpg"
-                                         alt="avatar-image">
-
-                                    <div class="message-body">
-                                        <strong>John Doe</strong>
-                                        <br>
-                                        5 members joined today
-                                        <br>
-                                        <span class="noti-date">Just now</span>
-                                    </div>
-
-                                </a>
-                            </li>
-                            <li class="message">
-                                <a href="#" class=" icon-not">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar.jpg"
-                                         alt="avatar-image">
-                                    <div class="message-body">
-                                        <strong>Tony</strong>
-                                        <br>
-                                        likes a photo of you
-                                        <br>
-                                        <span class="noti-date">5 min</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="message striped-col">
-                                <a href="#" class=" icon-not">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar6.jpg"
-                                         alt="avatar-image">
-
-                                    <div class="message-body">
-                                        <strong>John</strong>
-                                        <br>
-                                        Dont forgot to call...
-                                        <br>
-                                        <span class="noti-date">11 min</span>
-
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="message">
-                                <a href="#" class=" icon-not">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar1.jpg"
-                                         alt="avatar-image">
-                                    <div class="message-body">
-                                        <strong>Jenny Kerry</strong>
-                                        <br>
-                                        Very long description here...
-                                        <br>
-                                        <span class="noti-date">1 Hour</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="message striped-col">
-                                <a href="#" class=" icon-not ">
-                                    <img class="message-image rounded-circle" src="{{asset('DashboardAssets')}}/img/authors/avatar7.jpg"
-                                         alt="avatar-image">
-
-                                    <div class="message-body">
-                                        <strong>Ernest Kerry</strong>
-                                        <br>
-                                        2 members joined today
-                                        <br>
-                                        <span class="noti-date">3 Days</span>
-
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-footer"><a href="#"> View All Notifications</a></li>
-                        </ul>
-                    </li>
+                    
+                    
                     <!-- Laravel Login UL -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                </ul>
 
                    
                 </div>
@@ -376,6 +146,7 @@
                             <div class="riot">
                                 <div>
                                     {{ Auth::user()->name }}
+
                                     <span>
                                         <i class="fa fa-caret-down"></i>
                                     </span>
@@ -389,23 +160,17 @@
                                 <p> {{ Auth::user()->name }}</p>
                             </li>
                             <!-- Menu Body -->
-                            <li class="p-t-3 nav-item" ><a href="user_profile.html" class="nav-link"> <i class="fa fa-fw fa-user"></i> My
+                            <!-- <li class="p-t-3 nav-item" ><a href="user_profile.html" class="nav-link"> <i class="fa fa-fw fa-user"></i> My
                                 Profile </a>
                             </li>
                             <li ></li>
                             <li class="nav-item"><a href="edit_user.html" class="nav-link"> <span><i class="fa fa-fw fa-gear"></i> Account Settings</span>
                             </a></li>
-                            <li  class="dropdown-divider"></li>
+                            <li  class="dropdown-divider"></li> -->
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="lockscreen.html">
-                                        <i class="fa fa-fw fa-lock"></i>
-                                        Lock
-                                    </a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="login.html" href="{{ route('logout') }}"
+                                <div class="text-center pt-2 pb-1">
+                                    <a style="display: block;" href="login.html" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="fa fa-fw fa-sign-out"></i>
@@ -464,58 +229,80 @@
                     </div>
                 </div>
                 <ul class="navigation">
-                    <li id="active" class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/dashboard') { echo "active"; } ?>">
+                    <li id="active" class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/dashboard') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/home') { echo "active"; } ?>">
                         <a href="{{action('MainController@dashboard')}}">
                             <i class="menu-icon fa fa-fw fa-home"></i>
                             <span class="mm-text ">Dashboard</span>
                         </a>
                     </li>
+                    @if($blade_users->role_name == 'Admin')
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/user') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/user/update') {echo "active";} ?>">
                         <a href="{{action('UserController@index')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
                             <span class="mm-text ">All users for Admin</span>
                         </a>
                     </li>
+                    @endif
+                    @if($blade_users->role_name == 'Super Admin')
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/admin_user') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/admin_user/update') {echo "active";} ?>">
                         <a href="{{action('UserController@view_admin')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
                             <span class="mm-text ">All users for Super Admin</span>
                         </a>
                     </li>
+                    @endif
+                    @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager') 
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/customer') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/customer/update') {echo "active";} ?>">
                         <a href="{{action('CustomerController@index')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
                             <span class="mm-text ">Customers</span>
                         </a>
                     </li>
+                    @endif
+                    @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager')
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/category') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/category/update') {echo "active";} ?>">
                         <a href="{{action('CategoryController@index')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
                             <span class="mm-text ">Categories</span>
                         </a>
                     </li>
+                    @endif
+                    @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager')
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/product') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/product/update') {echo "active";} ?>">
                         <a href="{{action('ProductController@index')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
                             <span class="mm-text ">Products</span>
                         </a>
                     </li>
+                    @endif
+                    @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager')
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/discount') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/discount/update') {echo "active";} ?>">
                         <a href="{{action('DiscountController@index')}}">
                             <i class="menu-icon fa fa-fw fa-users"></i>
                             <span class="mm-text ">Discount Offers</span>
                         </a>
                     </li>
+                    @endif
+                    @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager')
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/sale') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/public/sale/update') {echo "active";} ?>">
                         <a href="{{action('SaleController@index')}}">
                             <i class="fa fa-fw fa-bar-chart-o"></i>
                             <span class="mm-text ml-2">Sales</span>
                         </a>
                     </li>
+                    @endif
+                    @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager' || $blade_users->role_name == 'User')
                     <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/pos/category') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/category/public/pos/update') {echo "active";} ?>">
                         <a href="{{action('SaleController@pos_category')}}">
                             <i class="fa fa-fw fa-bar-chart-o"></i>
                             <span class="mm-text ml-2">Generate Sales</span>
+                        </a>
+                    </li>
+                    @endif
+                    <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/pos/category') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/category/public/pos/update') {echo "active";} ?>">
+                        <a href="{{action('SaleController@pos_category')}}">
+                            <i class="fa fa-fw fa-bar-chart-o"></i>
+                            <span class="mm-text ml-2">Monthly Sales Report</span>
                     </li>
 
                 </ul>

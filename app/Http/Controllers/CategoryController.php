@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Product;
 use Auth;
 use DB;
 
@@ -14,14 +15,12 @@ class CategoryController extends Controller
 	public function __construct()
     {
         $this->middleware('auth');
-
-        $this->middleware('admin');
-
         $this->middleware('manager');
     }
 
     public function index()
     {
+
         $users = DB::table('users')
         ->join('role_users','role_users.user_id','=','users.id')
         ->join('roles','roles.role_id','=','role_users.role_id')
@@ -35,8 +34,6 @@ class CategoryController extends Controller
 
     	$category = Category::where('user_id', Auth::User()->id)
         ->orWhere('user_id', $users->parent_id)
-    	->where('is_deleted', 'No')
-    	->orderBy('category_id','desc')
 
         ->orWhere(function($query) use($child_users)
         {
@@ -44,8 +41,9 @@ class CategoryController extends Controller
                 $query->orWhere('user_id','=', $obj->id);
             }
         })
-
-    	->get();
+    	->orderBy('category_id','desc')
+        ->where('is_deleted', 'No')
+        ->get();
     	return view('categories.index')
     	->with('category',$category)
     	->with('status',"0");
@@ -176,9 +174,17 @@ class CategoryController extends Controller
     
     public function delete(Request $req)
     {
-    	$category = Category::where(["category_id"=>$req->category_id])->update([
-    		"is_deleted" => "Yes"
-    	]);
+    	// $category = Category::where(["category_id"=>$req->category_id])->update([
+    	// 	"is_deleted" => "Yes"
+    	// ]);
+
+        $category = Category::where(["category_id"=>$req->category_id])->first();        
+        $products = Product::where('category_id', $req->category_id);
+        foreach ($products as $obj) {
+            $obj->delete();
+        }
+        
+        $category = Category::where(["category_id"=>$req->category_id])->delete();
         
     	if($category)
     	{

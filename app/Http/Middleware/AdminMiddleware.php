@@ -10,6 +10,7 @@ use DB;
 
 class AdminMiddleware
 {
+    
     /**
      * Handle an incoming request.
      *
@@ -17,6 +18,7 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+    
     public function handle(Request $request, Closure $next)
     {
          $users = DB::table('users')
@@ -24,12 +26,12 @@ class AdminMiddleware
         ->join('roles','roles.role_id','=','role_users.role_id')
         ->where('users.id', Auth::user()->id)
         ->first();
-
+        
         if($users->role_name == 'Admin')
         {
             return $next($request);
         }
-
+        
         return redirect('/login');
     }
 }

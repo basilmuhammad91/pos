@@ -25,11 +25,11 @@ class UserMiddleware
         ->where('users.id', Auth::user()->id)
         ->first();
 
-        if($users->role_name == 'User')
+        if($users->role_name == 'User' || $users->role_name == 'Admin' || $users->role_name == 'Manager')
         {
             return $next($request);
         }
-
+        
         return redirect('/login');
     }
 }

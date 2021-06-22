@@ -7,6 +7,8 @@ use App\Models\Sale;
 use App\Models\ProductSale;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Customer;
+use App\Models\Discount;
 use DB;
 use Auth;
 
@@ -84,21 +86,132 @@ class SaleController extends Controller
         })
 
     	->get();
+
+        $discount = Discount::where('user_id', Auth::User()->id)
+        ->orWhere('user_id', $users->parent_id)
+        ->where('is_deleted', 'No')
+        ->orderBy('discount_id','desc')
+
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+        
+        ->get();
+
     	return view('sales.pos_category')
     	->with('category',$category)
     	->with('status',"0")
     	;
     }
-
+    
     public function pos(Request $req)
     {
-    	$category = Category::where(["category_id"=>$req->category_id])->first();
-        $all_category = Category::get();
+        $users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
+        $category = Category::where(["category_id"=>$req->category_id])->first();
+        $all_category = Category::where('user_id', Auth::User()->id)
+        ->orWhere('user_id', $users->parent_id)
+        ->where('is_deleted','No')
+
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+
+        ->get();
+
+        $customers = Customer::orWhere('user_id', Auth::User()->id)
+        
+        ->where('is_deleted','No')
+        ->orderBy('customer_id', 'desc')
+        ->orWhere('user_id', $users->parent_id)
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+        ->get();
+
+        $discount = Discount::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted', 'No')
+            ->orderBy('discount_id','desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            
+            ->get();
+
+        if($req->category_id == 0)
+        {
+            $category = Category::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted','No')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            ->get();
+
+            $products = Product::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted','No')
+            ->orderBy('product_id')
+            ->get();
+
+            $discount = Discount::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted', 'No')
+            ->orderBy('discount_id','desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            
+            ->get();
+
+            return view('sales.pos_all')
+            ->with('category', $category)
+            ->with('all_category', $all_category)
+            ->with('products', $products)
+            ->with('customers', $customers)
+            ->with('discount',$discount)
+            ->with('status', '0')
+            ;
+        }
+
     	return view('sales.pos')
     	->with('category', $category)
         ->with('all_category', $all_category)
-    	->with('status', "0")
+        ->with('customers', $customers)
+        ->with('discount',$discount)
+        ->with('status', '0')
     	;
+        
     }
 
     public function generate_sales(Request $req)
@@ -112,6 +225,8 @@ class SaleController extends Controller
         $sale->total = $req->grand_total_input;
         $sale->is_deleted = "No";
         $sale->user_id = Auth::User()->id;
+        $sale->customer_id = $req->customer_id;
+        $sale->receiver_id = $req->receiver_id;
         $sale->status = "Completed";
         
         if($sale->save())
@@ -127,7 +242,7 @@ class SaleController extends Controller
                 $product_update = Product::where('product_id',$value)->first();
                 $product = Product::where('product_id',$value)->update([
                     "stock" => $product_update->stock-$quantity[$key],
-                    "stock_sold" =>$product_update->stock_available+$quantity[$key],
+                    "stock_sold" =>$product_update->stock_sold+$quantity[$key],
                 ]);
             }
             

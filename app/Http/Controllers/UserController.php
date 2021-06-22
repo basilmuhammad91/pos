@@ -22,6 +22,7 @@ class UserController extends Controller
     public function index()
     {
     	$roles = Role::where('role_name','!=','Super Admin')
+        ->where('role_name','!=', 'Admin')
     	->get();
 
     	$users = DB::table('users')
@@ -139,7 +140,7 @@ class UserController extends Controller
     	->with('roles', $roles)
     	;
 	}    
-
+    
 	public function submit_admin(Request $req)
 	{
 		$req->validate([

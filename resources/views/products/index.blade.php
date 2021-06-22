@@ -27,6 +27,9 @@
 <link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/css/pickers.css">
 <!--end of page level css-->
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <aside class="right-side">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -149,10 +152,11 @@
                                 </label>
                                 <select id="" name="discount_id" class="form-control select2" style="width:100%" >
                                     <option value="">Select value...</option>
-                                        
-                                    </optgroup> -->
-                                    <option value="">abc</option>
-                                    <option value="">xyz</option>
+                                    
+                                    @foreach($discount as $obj)
+                                    <option value="{{ $obj->discount_id }}" >{{ $obj->name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -245,7 +249,7 @@
                                         <th class="text-center" style="vertical-align: middle;">Description</th>
                                         <th class="text-center" style="vertical-align: middle;">Model / Year</th>
                                         <th class="text-center" style="vertical-align: middle;">Featured</th>
-                                        <th class="text-center" style="vertical-align: middle;">Dicount</th>
+                                        <th class="text-center" style="vertical-align: middle;">Discount</th>
                                         <th class="text-center" style="vertical-align: middle;">Stock Available </th>
                                         <th class="text-center" style="vertical-align: middle;">Stock Sold</th>
                                         <th class="text-center" style="vertical-align: middle;">Original Price</th>
@@ -291,7 +295,7 @@
                                         </td>
                                         <td class="text-center" style="vertical-align: middle;">
                                             @if($obj->discount_id != null)
-                                                {{$obj->discount_id}}
+                                                {{$obj->discount->name }}
                                                 @else
                                                 {{'-'}}
                                             @endif
@@ -414,12 +418,13 @@
                                 <label for="select21" class="control-label">
                                     Select Discount
                                 </label>
-                                <select id="" name="discount_id" class="form-control select2" style="width:100%" >
+                                 <select id="" name="discount_id" class="form-control select2" style="width:100%" >
                                     <option value="">Select value...</option>
-                                        
-                                    </optgroup> -->
-                                    <option value="">abc</option>
-                                    <option value="">xyz</option>
+                                    
+                                    @foreach($discount as $dis)
+                                    <option @if($obj->discount_id == $dis->discount_id) {{ 'selected' }} @endif value="{{ $dis->discount_id }}" >{{ $dis->name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -677,5 +682,9 @@ $("#imgUpload2").change(function(){
     readURL2(this);
 });
     
+});
+
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
 });
 </script>

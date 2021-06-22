@@ -55,11 +55,11 @@ Route::post('/discount/update','DiscountController@update');
 Route::get('/discount/delete','DiscountController@delete');
 
 // SALE
-Route::get('/sale','SaleController@index');
-Route::get('/sale-details', 'SaleController@sale_detail');
-Route::get('/pos/category','SaleController@pos_category');
-Route::get('/pos','SaleController@pos');
-Route::post('/generate-sales','SaleController@generate_sales');
+Route::get('/sale','SaleController@index')->middleware('manager');
+Route::get('/sale-details', 'SaleController@sale_detail')->middleware('manager');
+Route::get('/pos/category','SaleController@pos_category')->middleware('user');
+Route::get('/pos','SaleController@pos')->middleware('user');
+Route::post('/generate-sales','SaleController@generate_sales')->middleware('user');
 
 // USER
 Route::get('/user','UserController@index')->middleware('admin');

@@ -2,6 +2,15 @@
 
 @section('master_body')
 
+<?php
+
+$blade_users = DB::table('users')
+->join('role_users','role_users.user_id','=','users.id')
+->join('roles','roles.role_id','=','role_users.role_id')
+->where('users.id', Auth::user()->id)
+->first();
+
+?>
 
 <!-- DROPDOWN CSS -->
 
@@ -24,6 +33,12 @@
 <!--end of page level css-->
 
 <style type="text/css">
+
+    .box
+    {
+        height: 100%;
+    }
+
 	.box:hover
 	{
 		transform: scale(1.05);
@@ -62,6 +77,8 @@
                             </h3>
                         </div>
                         <div class="card-body text-center">
+                            
+                            @if($blade_users->role_name == 'Manager' || $blade_users->role_name == 'Admin')
                             <div class="row text-right">
                                 <div class="col-md-12">
                                     <span class="btn btn-success float-right mr-3" data-toggle="modal" data-target="#formModal" style="float: right;">
@@ -70,6 +87,7 @@
                                     </span>
                                 </div>
                             </div>
+                            @endif
 
 <!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog"
@@ -139,6 +157,20 @@
 <!-- /.modal -->
                             
                         	<div class="row">
+
+                                <div class="col-md-2 text-center mb-3 mt-5">
+                                    <div class="text-center" style="width: fit-content; margin: auto;">
+                                        <div class="box px-3 py-3" style="background-color: #428BCA; width: fit-content; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" onclick="location.href = '{{action('SaleController@pos')}}?category_id=0'">
+                                            <div class="sub-box px-4 py-4" style="background-color: white; margin-bottom: 0.5em; box-shadow: inset 0 0 4px #000000; ">
+                                                
+                                                <img src="{{asset('DashboardAssets')}}/img/category-icon.png" class="img-fluid" width="100">
+
+                                            </div>
+                                            <span style="color: white; margin-top: 1em; font-size: 1.5em; ">ALL PRODUCTS</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                         		@foreach($category as $obj)
                         		<div class="col-md-2 text-center mb-3 mt-5">
 	                        		<div class="text-center" style="width: fit-content; margin: auto;">

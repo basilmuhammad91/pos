@@ -12,12 +12,9 @@ class DiscountController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
-        $this->middleware('admin');
-
         $this->middleware('manager');
     }
-
+    
     public function index()
     {
          $users = DB::table('users')
@@ -41,7 +38,7 @@ class DiscountController extends Controller
                 $query->orWhere('user_id','=', $obj->id);
             }
         })
-
+        
     	->get();
     	return view('discounts.index')
     	->with('discount',$discount)

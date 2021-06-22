@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Discount;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use DB;
@@ -14,9 +15,6 @@ class ProductController extends Controller
 	public function __construct()
     {
         $this->middleware('auth');
-
-        $this->middleware('admin');
-
         $this->middleware('manager');
     }
 
@@ -44,14 +42,31 @@ class ProductController extends Controller
         })
 
     	->get();
+
     	$product = Product::where('user_id', Auth::User()->id)
         ->orWhere('user_id', $users->parent_id)
     	->where('is_deleted','No')
     	->orderBy('product_id')
     	->get();
+
+        $discount = Discount::where('user_id', Auth::User()->id)
+        ->orWhere('user_id', $users->parent_id)
+        ->where('is_deleted', 'No')
+        ->orderBy('discount_id','desc')
+
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+            }
+        })
+        
+        ->get();
+
     	return view('products.index')
     	->with('product',$product)
     	->with('category',$category)
+        ->with('discount',$discount)
     	->with('status',"0")
     	;
     }
@@ -124,9 +139,25 @@ class ProductController extends Controller
                 }
             })
 	    	->get();
+
+            $discount = Discount::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted', 'No')
+            ->orderBy('discount_id','desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            
+            ->get();
+
 	    	return view('products.index')
 	    	->with('product',$product)
 	    	->with('category',$category)
+            ->with('discount',$discount)
 	    	->with('status',"Submitted")
 	    	;
 		}
@@ -184,9 +215,25 @@ class ProductController extends Controller
                 }
             })
 	    	->get();
+
+            $discount = Discount::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted', 'No')
+            ->orderBy('discount_id','desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            
+            ->get();
+
 	    	return view('products.index')
 	    	->with('product',$product)
 	    	->with('category',$category)
+            ->with('discount',$discount)
 	    	->with('status',"Updated")
 	    	;
     	}
@@ -228,9 +275,25 @@ class ProductController extends Controller
                 }
             })
 	    	->get();
+
+            $discount = Discount::where('user_id', Auth::User()->id)
+            ->orWhere('user_id', $users->parent_id)
+            ->where('is_deleted', 'No')
+            ->orderBy('discount_id','desc')
+
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            
+            ->get();
+
 	    	return view('products.index')
 	    	->with('product',$product)
 	    	->with('category',$category)
+            ->with('discount',$discount)
 	    	->with('status',"Updated")
 	    	;
     	}
