@@ -10,7 +10,9 @@ $blade_users = DB::table('users')
 ->first();
 
 ?>
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <!-- DROPDOWN CSS -->
 
     <link rel="stylesheet" type="text/css" href="{{asset('DashboardAssets')}}/vendors/bootstrap-multiselect/css/bootstrap-multiselect.css" >
@@ -103,16 +105,23 @@ $blade_users = DB::table('users')
                         <div class="card-body text-center">
                         	<div class="row">
                              <div class="col-md-9">
-                                @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager')
+                                
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        
+                                        <input type="text" name="search" id="search" placeholder="Search Products" class="form-control">
+                                        
+                                    </div>
+                                    <div class="col-md-3 offset-5">
+                                        
+                                        @if($blade_users->role_name == 'Admin' || $blade_users->role_name == 'Manager')
                                         <span class="btn btn-success float-right mr-3" data-toggle="modal" data-target="#formModal">
                                             <i class="fa fa-plus"></i>
                                             <span>Add Product</span>
                                         </span>
+                                        @endif
                                     </div>
                                 </div>
-                                @endif
 <!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -307,6 +316,14 @@ $blade_users = DB::table('users')
                                     </div>
                                     @endforeach
                                 </div>
+                                <style type="text/css">
+                                    .pag nav
+                                    {
+                                        width: fit-content;
+                                        margin: auto;
+                                    }
+                                </style>
+                                <span class="pag">{{ $products->links("pagination::bootstrap-4") }}</span>
                              </div>   
 
                             <div class="col-md-3">
@@ -342,6 +359,18 @@ $blade_users = DB::table('users')
                                                 @endforeach
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-left">
+                                        <label class="">Amount Received</label>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="paid" id="amount_paid">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 text-left">
+                                        <label>Remaining</label>
+                                        <input type="number" name="" class="form-control" disabled="true" style="background: transparent;" id="remaining">
                                     </div>
                                 </div>
                                 <br>
@@ -556,5 +585,46 @@ $("#imgUpload2").change(function(){
     }
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
+});
+
+$(document).ready(function(){
+    $('#amount_paid').keyup(function(){
+        var amount_paid = $('#amount_paid').val();
+        var grand_total_input = $('#grand_total_input').val();
+
+        $('#remaining').val(grand_total_input-amount_paid);
+
+        if(amount_paid == 0)
+        {
+            $('#remaining').val();
+        }
+    })
+});
+
+$(document).ready(function(){
+    $('body').on('keyup', '#search', function(){
+        var search_text = $(this).val();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route("search-products") }}',
+            dataType: 'json',
+            data: {
+                '_token' : '{{ csrf_token() }}',
+                search_text: search_text
+            },
+
+            success: function(res)
+            {
+                console.log(res);
+            }
+        });
+
+    });
+});
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
 });
 </script>

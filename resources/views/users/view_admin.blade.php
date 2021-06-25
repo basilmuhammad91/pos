@@ -221,7 +221,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-validation3" action="{{action('UserController@update')}}" method="post" enctype="multipart/form-data">
+                <form id="form-validation3" action="{{action('UserController@update_admin')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ $obj->id }}">
                     <div class="row">

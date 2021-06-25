@@ -35,7 +35,7 @@ class SaleController extends Controller
     	$sale = Sale::where('user_id', Auth::User()->id)
     	->where('is_deleted', 'No')
     	->orderBy('sale_id','desc')
-
+        ->orderBy('sale_id','desc')
         ->orWhere('user_id', $users->parent_id)
         ->orWhere(function($query) use($child_users)
         {
@@ -178,7 +178,13 @@ class SaleController extends Controller
             ->orWhere('user_id', $users->parent_id)
             ->where('is_deleted','No')
             ->orderBy('product_id')
-            ->get();
+            ->orWhere(function($query) use($child_users)
+            {
+                foreach ($child_users as $obj) {
+                    $query->orWhere('user_id','=', $obj->id);
+                }
+            })
+            ->paginate(12);
 
             $discount = Discount::where('user_id', Auth::User()->id)
             ->orWhere('user_id', $users->parent_id)
@@ -193,7 +199,6 @@ class SaleController extends Controller
             })
             
             ->get();
-
             return view('sales.pos_all')
             ->with('category', $category)
             ->with('all_category', $all_category)
@@ -223,6 +228,7 @@ class SaleController extends Controller
         
         $sale = new Sale();
         $sale->total = $req->grand_total_input;
+        $sale->paid = $req->paid;
         $sale->is_deleted = "No";
         $sale->user_id = Auth::User()->id;
         $sale->customer_id = $req->customer_id;
@@ -261,20 +267,11 @@ class SaleController extends Controller
         
     }
 
+    public function search_products(Request $req)
+    {
+        // $products = Product::where('name', 'like', '%' . $req->get('search_text') . '%' )->get();
+        // return json_encode($products);
+        return json_encode('value');
+    }
+
 }
-
-// $sale = Sale::where(["sale_id"=>$req->sale_id])->first();
-//     	// $sale = Sale::get();
-//     	// dd($sale->product_sale);
-//   //   	$product_sale = DB::table('product_sales')
-// 		// ->join('products','product_sales.product_id','=','products.product_id')
-// 		// ->distinct()
-// 		// ->get(['product_sales.product_id AS product_id', 'products.name as product_name', 'products.s_price'])
-// 		// ;
-
-
-//     	// return $product_sale;
-//     	return view('sales.sale_detail')
-//     	->with('sale', $sale)
-//     	;
-//     }

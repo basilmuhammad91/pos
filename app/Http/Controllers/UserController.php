@@ -58,7 +58,7 @@ class UserController extends Controller
 
     	if($req->image)
 		{
-			$user->image = $req->image->store('Users/Products','public');
+			$user->image = $req->image->store('Images/Users','public');
 		}
 
 		if($user->save())
@@ -74,13 +74,13 @@ class UserController extends Controller
 
 		}
     }
-
+    
     public function update(Request $req)
     {
     	if($req->image)
     	{
 			$user = User::where(["id"=>$req->user_id])->update([
-				"image" => $req->image->store('Images/Customers','public'),
+				"image" => $req->image->store('Images/Users','public'),
 	    		"name" => $req->name,
 	    		"email" => $req->email,
 	    		"phone" => $req->phone,
@@ -158,7 +158,7 @@ class UserController extends Controller
 
     	if($req->image)
 		{
-			$user->image = $req->image->store('Users/Products','public');
+			$user->image = $req->image->store('Images/Users','public');
 		}
 
 		if($user->save())
@@ -181,10 +181,41 @@ class UserController extends Controller
 
 	public function update_admin(Request $req)
 	{
+
+        $users = DB::table('users')
+        ->join('role_users','role_users.user_id','=','users.id')
+        ->join('roles','roles.role_id','=','role_users.role_id')
+        ->where('users.id', $req->user_id)
+        ->first();
+        
+        $child_users = DB::table('users')
+        ->where('users.parent_id', $users->parent_id)
+        ->get();
+
+        if($req->status == 'Inactive')
+        {
+            for($i = 0; $i < $child_users->count(); $i++)
+            {
+                $user = User::where('id', $child_users[$i]->id)->update([
+                    "status"=>"Inactive"
+                ]);
+            }
+        }
+
+        if($req->status == 'Active')
+        {
+            for($i = 0; $i < $child_users->count(); $i++)
+            {
+                $user = User::where('id', $child_users[$i]->id)->update([
+                    "status"=>"Active"
+                ]);
+            }
+        }
+
 		if($req->image)
     	{
 			$user = User::where(["id"=>$req->user_id])->update([
-				"image" => $req->image->store('Images/Customers','public'),
+				"image" => $req->image->store('Images/Users','public'),
 	    		"name" => $req->name,
 	    		"email" => $req->email,
 	    		"phone" => $req->phone,

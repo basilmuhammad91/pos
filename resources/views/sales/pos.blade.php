@@ -313,6 +313,7 @@ $blade_users = DB::table('users')
                                     </div>
                                     @endforeach
                                 </div>
+                                
                              </div>   
 
                             <div class="col-md-3">
@@ -350,7 +351,18 @@ $blade_users = DB::table('users')
                                         </div>
                                     </div>
                                 </div>
-                                <br>
+                                <div class="row">
+                                    <div class="col-6 text-left">
+                                        <label class="">Amount Received</label>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="paid" id="amount_paid">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 text-left">
+                                        <label>Remaining</label>
+                                        <input type="number" name="" class="form-control" disabled="true" style="background: transparent;" id="remaining">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button class="btn btn-default col-12" style="color: black; ">Reset</button>
@@ -565,5 +577,19 @@ $("#imgUpload2").change(function(){
     $(document).ready(function() {  
         $('.js-example-basic-single').select2();
     });
+
+    $(document).ready(function(){
+    $('#amount_paid').keyup(function(){
+        var amount_paid = $('#amount_paid').val();
+        var grand_total_input = $('#grand_total_input').val();
+
+        $('#remaining').val(grand_total_input-amount_paid);
+
+        if(amount_paid == 0)
+        {
+            $('#remaining').val();
+        }
+    })
+});
 
 </script>

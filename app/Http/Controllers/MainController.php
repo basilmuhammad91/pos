@@ -55,6 +55,7 @@ class MainController extends Controller
         {
             foreach ($child_users as $obj) {
                 $query->orWhere('user_id','=', $obj->id);
+                $query->whereDate('date', Carbon::today());
             }
         })
         ->count();

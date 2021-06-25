@@ -39,9 +39,10 @@ class CustomerController extends Controller
         {
             foreach ($child_users as $obj) {
                 $query->orWhere('user_id','=', $obj->id);
+                $query->where('is_deleted', '=', 'No');
             }
         })
-
+        
     	->get();
 
     	return view('customers.index')

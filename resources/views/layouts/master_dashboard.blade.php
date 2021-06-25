@@ -15,6 +15,7 @@ $blade_users = DB::table('users')
 <head>
     <meta charset="UTF-8">
     <title>Point of Sales</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
     <link rel="shortcut icon" href="{{asset('DashboardAssets')}}/img/favicon.ico"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -140,9 +141,15 @@ $blade_users = DB::table('users')
                     <!-- User Account: style can be found in dropdown-->
                     <li class="nav-item dropdown user user-menu">
                         <a href="#" class="nav-link dropdown-toggle padding-user pt-3">
-                            <img src="{{asset('DashboardAssets')}}/img/user-avatar.png" width="35"
+                                 @if(Auth::user()->image == null)
+                                <img src="{{asset('DashboardAssets')}}/img/user-avatar.png" width="35"
                                  class="rounded-circle img-fluid pull-left"
                                  height="35" alt="User Image">
+                                @else
+                                <img src="{{asset('storage/'.Auth::user()->image)}}" width="35"
+                                 class="rounded-circle img-fluid pull-left"
+                                 height="35" alt="User Image">
+                                @endif
                             <div class="riot">
                                 <div>
                                     {{ Auth::user()->name }}
@@ -156,7 +163,12 @@ $blade_users = DB::table('users')
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
+                                @if(Auth::user()->image == null)
                                 <img src="{{asset('DashboardAssets')}}/img/user-avatar.png" class="rounded-circle" alt="User Image">
+                                @else
+                                <img src="{{asset('storage/'.Auth::user()->image)}}" class="rounded-circle" alt="User Image">
+                                @endif
+
                                 <p> {{ Auth::user()->name }}</p>
                             </li>
                             <!-- Menu Body -->
@@ -299,10 +311,17 @@ $blade_users = DB::table('users')
                         </a>
                     </li>
                     @endif
-                    <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/pos/category') { echo "active"; } else if(URL::current() == 'http://localhost/laravel/pos/category/public/pos/update') {echo "active";} ?>">
-                        <a href="{{action('SaleController@pos_category')}}">
+                    <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/monthly_report') { echo "active"; } ?>">
+                        <a href="{{action('ReportController@monthly_report')}}">
                             <i class="fa fa-fw fa-bar-chart-o"></i>
-                            <span class="mm-text ml-2">Monthly Sales Report</span>
+                            <span class="mm-text ml-2">Monthly Sales</span>
+                        </a>
+                    </li>
+                    <li class="<?php if(URL::current() == 'http://localhost/laravel/pos/public/weekly_report') { echo "active"; } ?>">
+                        <a href="{{action('ReportController@weekly_report')}}">
+                            <i class="fa fa-fw fa-bar-chart-o"></i>
+                            <span class="mm-text ml-2">Weekly Sales</span>
+                        </a>
                     </li>
 
                 </ul>

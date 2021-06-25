@@ -218,12 +218,11 @@
                                     <tr>
                                         <td class="text-center" style="vertical-align: middle;">{{$obj->sale_id}}</td>
                                         <td class="text-center" style="vertical-align: middle;">
-                                            @if($obj->customer_id != null)
+                                             @if($obj->customer_id != null)
                                             {{$obj->customer->name}}
                                             @else
                                             {{ '-' }}
                                             @endif
-
                                         </td>
                                         <td class="text-center" style="vertical-align: middle;">
                                             @if($obj->receiver_id != null)

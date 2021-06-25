@@ -71,3 +71,10 @@ Route::get('/user/delete','UserController@delete');
 Route::get('/admin_user', 'UserController@view_admin')->middleware('superadmin');
 Route::post('/admin_user', 'UserController@submit_admin')->middleware('superadmin');
 Route::post('/admin_user/update', 'UserController@update_admin')->middleware('superadmin');
+
+//REPORT
+Route::get('/monthly_report','ReportController@monthly_report');
+Route::get('/weekly_report','ReportController@weekly_report');
+
+//SEARCH
+Route::post('/products/search', ['as' => 'search-products', 'uses' => 'SaleController@search_product']);
