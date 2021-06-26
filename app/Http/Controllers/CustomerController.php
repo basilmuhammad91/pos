@@ -210,9 +210,11 @@ class CustomerController extends Controller
 
     public function delete(Request $req)
     {
-    	$customer = Customer::where(["customer_id"=>$req->customer_id])->update([
-    		"is_deleted" => "Yes"
-    	]);
+    	// $customer = Customer::where(["customer_id"=>$req->customer_id])->update([
+    	// 	"is_deleted" => "Yes"
+    	// ]);
+
+        $customer = Customer::where(["customer_id"=>$req->customer_id])->delete();
 
     	if($customer)
     	{

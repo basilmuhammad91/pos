@@ -178,18 +178,24 @@ class CategoryController extends Controller
     	// 	"is_deleted" => "Yes"
     	// ]);
 
-        $category = Category::where(["category_id"=>$req->category_id])->first();        
-        $products = Product::where('category_id', $req->category_id);
-        foreach ($products as $obj) {
-            $obj->delete();
-        }
+   //      $category = Category::where(["category_id"=>$req->category_id])->first();        
+   //      $products = Product::where('category_id', $req->category_id);
+   //      foreach ($products as $obj) {
+   //          $obj->delete();
+   //      }
         
+   //      $category = Category::where(["category_id"=>$req->category_id])->delete();
+        
+   //  	if($category)
+   //  	{
+			// return redirect()->action('CategoryController@index');
+   //  	}
+        
+
+
         $category = Category::where(["category_id"=>$req->category_id])->delete();
         
-    	if($category)
-    	{
-			return redirect()->action('CategoryController@index');
-    	}
+        return back();
 
     }
 

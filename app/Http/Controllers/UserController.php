@@ -37,7 +37,7 @@ class UserController extends Controller
     	->with('status', '0')
     	->with('roles', $roles)
     	;
-
+        
     }
 
 // WHEN ADMIN ADDING USERS
@@ -160,7 +160,7 @@ class UserController extends Controller
 		{
 			$user->image = $req->image->store('Images/Users','public');
 		}
-
+        
 		if($user->save())
 		{
 			$user_to_update = User::where('id', $user->id)->update([

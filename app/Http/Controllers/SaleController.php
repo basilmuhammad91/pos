@@ -177,14 +177,14 @@ class SaleController extends Controller
             $products = Product::where('user_id', Auth::User()->id)
             ->orWhere('user_id', $users->parent_id)
             ->where('is_deleted','No')
-            ->orderBy('product_id')
+            ->orderBy('product_id', 'desc')
             ->orWhere(function($query) use($child_users)
             {
                 foreach ($child_users as $obj) {
                     $query->orWhere('user_id','=', $obj->id);
                 }
             })
-            ->paginate(12);
+            ->get();
 
             $discount = Discount::where('user_id', Auth::User()->id)
             ->orWhere('user_id', $users->parent_id)
@@ -267,11 +267,54 @@ class SaleController extends Controller
         
     }
 
-    public function search_products(Request $req)
+    public function search_product(Request $req)
     {
-        // $products = Product::where('name', 'like', '%' . $req->get('search_text') . '%' )->get();
-        // return json_encode($products);
-        return json_encode('value');
+        $users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
+        $output = '';
+
+        $products = Product::where('name', 'like', '%' . $req->get('search_text') . '%' )->get();
+        
+        if($products)
+        {
+            foreach ($products as $key => $product) {
+                $output.= 
+                '<div class="col-md-3 col-lg-2 col-sm-4 text-center mb-3 mt-5">
+                   <div class="text-center" style="margin: auto;">
+                    <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_'.$product->product_id.'" onclick="myFunction("'.$product->name.'", '.$product->product_id.', '.$product->s_price.');" >
+                        <h6 style="color: white; text-transform: uppercase; background-color: 2c6ea8; padding: 0.1em 2em; background-color: 2c6ea8; border-radius: 0.3em 0.3em 0 0; margin: 0; "> '.$product->category->name.' </h6>
+
+                        <div class="sub-box px-4 py-4" style="background-color: white; margin-bottom: 0.9em; box-shadow: inset 0 0 4px #000000; ">
+                            <img src="'.asset("DashboardAssets").'/img/category-icon.png" class="img-fluid" width="60">
+                        </div>
+
+                        <h6 style="color: white; margin-top: 1em; text-transform: uppercase; background-color: 2c6ea8; padding: 0.1em 2em; background-color: 2c6ea8; border-radius: 0.3em"> '.$product->name.'  -  '.$product->s_price.' </h6>
+                    </div>
+                   </div>
+                 </div>'
+                 ;
+                }
+        }
+        
+        return response($output);
+      
+      // ===============
+    }
+
+
+    // DELETE SALES
+    public function delete(Request $req)
+    {
+        $sale = Sale::where(["sale_id"=>$req->sale_id])->delete();
+        return redirect()->action('SaleController@index');
     }
 
 }

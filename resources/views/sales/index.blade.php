@@ -254,7 +254,7 @@
 
                                             <a onclick="(new PNotify({
                                         title: 'Confirmation Needed',
-                                        text: 'Are you sure?',
+                                        text: 'Are you sure? If you delete this you all the data related to this record will be automatically deleted !',
                                         icon: 'fa fa-question-circle',
                                         type:'success',
                                         hide: false,
@@ -269,7 +269,7 @@
                                             history: false
                                         }
                                     })).get().on('pnotify.confirm', function(){
-                                        window.location.href = '{{action('CategoryController@delete')}}?category_id={{$obj->category_id}}';
+                                        window.location.href = '{{action('SaleController@delete')}}?sale_id={{$obj->sale_id}}';
                                     }).on('pnotify.cancel', function(){
                                         
                                     });" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>

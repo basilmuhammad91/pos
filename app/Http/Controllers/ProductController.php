@@ -46,7 +46,14 @@ class ProductController extends Controller
     	$product = Product::where('user_id', Auth::User()->id)
         ->orWhere('user_id', $users->parent_id)
     	->where('is_deleted','No')
-    	->orderBy('product_id')
+    	->orderBy('product_id', 'desc')
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+                $query->where('is_deleted', '=', 'No');
+            }
+        })
     	->get();
 
         $discount = Discount::where('user_id', Auth::User()->id)
@@ -74,9 +81,28 @@ class ProductController extends Controller
     public function submit(Request $req)
     {
 
+        $users = DB::table('users')
+            ->join('role_users','role_users.user_id','=','users.id')
+            ->join('roles','roles.role_id','=','role_users.role_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+            $child_users = DB::table('users')
+            ->where('users.parent_id', $users->parent_id)
+            ->get();
+
     	$product2 = Product::where('user_id', Auth::User()->id)
-    	->where('is_deleted', 'No')
-    	->get();
+        ->orWhere('user_id', $users->parent_id)
+        ->where('is_deleted','No')
+        ->orderBy('product_id', 'desc')
+        ->orWhere(function($query) use($child_users)
+        {
+            foreach ($child_users as $obj) {
+                $query->orWhere('user_id','=', $obj->id);
+                $query->where('is_deleted', '=', 'No');
+            }
+        })
+        ->get();
 
     	foreach ($product2 as $obj) {
     		if($obj->name == $req->name && $obj->category_id == $req->category_id)
@@ -303,9 +329,11 @@ class ProductController extends Controller
     
     public function delete(Request $req)
     {
-    	$product = Product::where(["product_id"=>$req->product_id])->update([
-    		"is_deleted" => "Yes"
-    	]);
+        $product = Product::where(["product_id"=>$req->product_id])->delete();
+
+    	// $product = Product::where(["product_id"=>$req->product_id])->update([
+    	// 	"is_deleted" => "Yes"
+    	// ]);
 
     	if($product)
     	{

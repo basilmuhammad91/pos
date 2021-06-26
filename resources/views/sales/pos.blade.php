@@ -291,10 +291,10 @@ $blade_users = DB::table('users')
 
                                 <div class="row">
                                     @foreach($category->product->where('status','Active') as $obj)
-                                    <div class="col-md-3 col-lg-2 col-sm-4 text-center mb-3 mt-5">
+                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 text-center mb-3 mt-5">
                                         <div class="text-center" style="margin: auto;">
                                             <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_{{ $obj->product_id }}" onclick="myFunction('{{$obj->name}}', {{$obj->product_id }}, {{ $obj->s_price }});" >
-                                                <h6 style="color: white; text-transform: uppercase; background-color: 2c6ea8; padding: 0.1em 2em; background-color: 2c6ea8; border-radius: 0.3em 0.3em 0 0; margin: 0; ">{{ $obj->category->name }}</h6>
+                                                <h6 style="color: white; text-transform: uppercase; background-color: 2c6ea8; padding: 1px 1px; background-color: 2c6ea8; border-radius: 0.3em 0.3em 0 0; margin: 0; ">{{ $obj->category->name }}</h6>
                                                 <div class="sub-box px-4 py-4" style="background-color: white; margin-bottom: 0.9em; box-shadow: inset 0 0 4px #000000; ">
                                                     
                                                     @if($obj->image != null)
@@ -307,7 +307,7 @@ $blade_users = DB::table('users')
                                                     @endif
 
                                                 </div>
-                                                <h6 style="color: white; margin-top: 1em; text-transform: uppercase; background-color: 2c6ea8; padding: 0.1em 2em; background-color: 2c6ea8; border-radius: 0.3em">{{ $obj->name }} - {{ $obj->s_price }}</h6>
+                                                <h6 style="color: white; margin-top: 1em; text-transform: uppercase; background-color: 2c6ea8; padding: 1px 1px; background-color: 2c6ea8; border-radius: 0.3em">{{ $obj->name }} - {{ $obj->s_price }}</h6>
                                             </div>
                                         </div>
                                     </div>

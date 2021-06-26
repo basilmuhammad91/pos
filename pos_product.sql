@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2021 at 08:16 PM
+-- Generation Time: Jun 26, 2021 at 05:15 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -41,11 +41,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `name`, `image`, `is_deleted`, `user_id`, `date`) VALUES
-(16, 'Uzair5', NULL, 'Yes', 1, '2021-06-19 12:51:40'),
 (17, 'Rashid', NULL, 'No', 13, '2021-06-19 12:53:29'),
 (19, 'Bilal', NULL, 'No', 1, '2021-06-19 14:21:28'),
 (20, 'Osama', NULL, 'No', 16, '2021-06-19 15:34:52'),
-(21, 'osama1', NULL, 'No', 17, '2021-06-19 15:35:08');
+(21, 'osama1', NULL, 'No', 17, '2021-06-19 15:35:08'),
+(22, 'ali', 'Images/Categories/VTx9W8YUShEeb6ZVL2fHBz7MzWlyiYCxPDCOh8Pz.jpg', 'No', 31, '2021-06-24 15:32:55');
 
 -- --------------------------------------------------------
 
@@ -88,10 +88,11 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `name`, `father_name`, `email`, `cnic`, `phone`, `address`, `description`, `image`, `status`, `is_deleted`, `user_id`, `date`) VALUES
-(14, 'Uzair', 'dsfds', 'uzair@gmail.con', 'sdfas', '5453454', NULL, NULL, NULL, 'Active', 'No', 1, '2021-06-19 12:36:39'),
+(14, 'Uzair', 'dsfds', 'uzair@gmail.con', 'sdfas', '5453454', NULL, NULL, NULL, 'Active', 'Yes', 1, '2021-06-19 12:36:39'),
 (15, 'Rashid', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '4510111563181', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, NULL, 'Active', 'No', 13, '2021-06-19 12:36:57'),
 (16, 'adf', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', NULL, NULL, NULL, 'Active', 'No', 14, '2021-06-19 12:39:07'),
-(17, 'Rashid', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, NULL, 'Active', 'No', 16, '2021-06-22 11:25:52');
+(17, 'Rashid', 'Aijaz Abbasi', 'rashid@digitalsquare.us', '45101-1156318-1', '03313817104', 'dsafsadf\r\nsdfsdaf', NULL, NULL, 'Active', 'No', 16, '2021-06-22 11:25:52'),
+(18, 'abii', 'jabii', 'abi@gmail.com', '4200-22155-224', '0333-3333-3333', 'dslfhlk/sf2sfd', 'sdfsdjfsdgjfdk\'gjfdg\'fdgj\'klfdjgkldfjg', 'Images/Customers/u4RcX0C4FtS2BaxzhYfMoK2te8hckCOX9Bzy6hap.jpg', 'Active', 'No', 31, '2021-06-24 15:32:22');
 
 -- --------------------------------------------------------
 
@@ -226,10 +227,21 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `category_id`, `description`, `model`, `year`, `is_featured`, `discount_id`, `stock`, `stock_sold`, `o_price`, `s_price`, `image`, `user_id`, `status`, `is_deleted`, `date`) VALUES
-(11, 'Uzairdad', 16, 'dsfsd', NULL, NULL, NULL, 11, 3, 7, 1500, 1800, NULL, 1, 'Active', 'No', '2021-06-19 14:18:46'),
-(12, 'Rashid Abbasi', 17, NULL, 'Echo', '2008', 'on', NULL, 46, 4, 1500, 3000, NULL, 1, 'Active', 'Yes', '2021-06-21 15:18:55'),
-(13, 'Rashid', 19, NULL, 'Echo', '2008', 'on', 12, 10, 0, 30000, 35000, NULL, 1, 'Active', 'No', '2021-06-22 13:46:50'),
-(14, 'Rashid 2', 19, NULL, 'Gamma', NULL, NULL, 8, 100, 0, 1500, 2000, NULL, 1, 'Active', 'No', '2021-06-22 13:48:32');
+(12, 'Rashid Abbasi', 17, NULL, 'Echo', '2008', 'on', NULL, 40, 10, 1500, 3000, NULL, 1, 'Active', 'Yes', '2021-06-21 15:18:55'),
+(13, 'Rashid', 19, NULL, 'Echo', '2008', 'on', 12, 5, 5, 30000, 35000, NULL, 1, 'Active', 'No', '2021-06-22 13:46:50'),
+(14, 'Rashid 2', 19, NULL, 'Gamma', NULL, NULL, 8, 96, 4, 1500, 2000, NULL, 1, 'Active', 'No', '2021-06-22 13:48:32'),
+(15, 'Rashiddd', 20, NULL, 'Echo', '2008', NULL, NULL, 47, 3, 1500, 1550, NULL, 16, 'Active', 'No', '2021-06-23 13:54:46'),
+(16, 'asd', 22, 'Khadiii Khadiii Khadiii Khadiii Khadiii Khadiii', 'dress', '2020', 'on', NULL, 196, 4, 2000, 3000, NULL, 31, 'Active', 'No', '2021-06-24 15:34:07'),
+(17, 'adsf', 19, NULL, 'Gamma', '2008', 'on', NULL, 4, 1, 1500, 2000, NULL, 1, 'Active', 'No', '2021-06-24 16:34:11'),
+(18, 'a', 17, NULL, 'Gamma', '2008', 'on', NULL, 48, 2, 1500, 1800, NULL, 1, 'Active', 'No', '2021-06-24 16:37:40'),
+(19, 'b', 19, NULL, 'Gamma', NULL, NULL, NULL, 49, 1, 1500, 9000, NULL, 1, 'Active', 'No', '2021-06-24 16:49:09'),
+(20, 'c', 17, NULL, '200', '2008', NULL, 11, 89, 1, 1500, 18100, NULL, 1, 'Active', 'Yes', '2021-06-24 16:49:39'),
+(22, 'a', 19, NULL, 'Echo', '2008', NULL, 12, 50, 0, 1500, 2000, NULL, 1, 'Active', 'No', '2021-06-26 11:39:20'),
+(23, 'Rashid Abbasi', 17, NULL, 'Echo', '2021', NULL, NULL, 5000, 0, 1500, 5000, NULL, 1, 'Active', 'No', '2021-06-26 11:47:30'),
+(24, 'd', 19, NULL, 'Echo', '2008', NULL, 8, 5, 0, 1500, 2000, NULL, 1, 'Active', 'No', '2021-06-26 11:55:10'),
+(25, 'e', 17, NULL, 'Echo', '2021', NULL, NULL, 4, 1, 1500, 1500, NULL, 1, 'Active', 'No', '2021-06-26 11:55:46'),
+(26, 'f', 17, NULL, 'Echo', '2008', NULL, NULL, 1499, 1, 1500, 1500, NULL, 1, 'Active', 'No', '2021-06-26 11:56:07'),
+(27, 'g', 17, NULL, 'Gamma', '2008', NULL, NULL, 1495, 5, 1500, 1500, NULL, 1, 'Active', 'No', '2021-06-26 11:56:19');
 
 -- --------------------------------------------------------
 
@@ -251,19 +263,28 @@ CREATE TABLE `product_sales` (
 --
 
 INSERT INTO `product_sales` (`product_sale_id`, `sale_id`, `product_id`, `quantity`, `price`, `date`) VALUES
-(40, 22, 11, 6, 10800, '2021-06-19 15:47:11'),
-(41, 23, 11, 12, 21600, '2021-06-21 18:12:18'),
-(42, 24, 11, 3, 5400, '2021-06-21 18:15:15'),
-(43, 25, 11, 7, 12600, '2021-06-22 10:48:59'),
-(44, 26, 11, 2, 3600, '2021-06-22 10:49:49'),
-(45, 27, 11, 1, 1800, '2021-06-22 10:50:25'),
-(46, 28, 11, 2, 3600, '2021-06-22 10:52:01'),
-(47, 29, 11, 2, 3600, '2021-06-22 10:52:21'),
 (48, 30, 12, 1, 3000, '2021-06-22 13:20:47'),
 (49, 31, 12, 2, 6000, '2021-06-22 13:21:13'),
-(50, 31, 11, 1, 1800, '2021-06-22 13:21:13'),
-(51, 33, 11, 1, 1800, '2021-06-22 13:25:28'),
-(52, 33, 12, 1, 3000, '2021-06-22 13:25:28');
+(52, 33, 12, 1, 3000, '2021-06-22 13:25:28'),
+(53, 35, 15, 3, 4650, '2021-06-23 13:55:23'),
+(54, 37, 13, 1, 35000, '2021-06-24 14:18:05'),
+(55, 37, 14, 1, 2000, '2021-06-24 14:18:06'),
+(56, 38, 12, 2, 6000, '2021-06-24 15:14:14'),
+(57, 39, 16, 3, 9000, '2021-06-24 15:37:34'),
+(58, 40, 16, 1, 3000, '2021-06-24 15:46:17'),
+(59, 41, 14, 2, 4000, '2021-06-24 16:24:45'),
+(60, 41, 13, 1, 35000, '2021-06-24 16:24:45'),
+(61, 42, 19, 1, 9000, '2021-06-24 17:45:43'),
+(63, 42, 12, 1, 3000, '2021-06-24 17:45:43'),
+(64, 42, 13, 1, 35000, '2021-06-24 17:45:43'),
+(65, 42, 14, 1, 2000, '2021-06-24 17:45:43'),
+(66, 42, 17, 1, 2000, '2021-06-24 17:45:43'),
+(67, 42, 18, 1, 1800, '2021-06-24 17:45:43'),
+(71, 44, 13, 2, 70000, '2021-06-26 10:56:44'),
+(72, 44, 12, 2, 6000, '2021-06-26 10:56:44'),
+(74, 45, 27, 5, 7500, '2021-06-26 12:25:29'),
+(75, 45, 26, 1, 1500, '2021-06-26 12:25:29'),
+(76, 45, 25, 1, 1500, '2021-06-26 12:25:29');
 
 -- --------------------------------------------------------
 
@@ -308,13 +329,19 @@ CREATE TABLE `role_users` (
 INSERT INTO `role_users` (`role_user_id`, `role_id`, `user_id`, `date`) VALUES
 (9, 4, 13, '2021-06-18 16:19:34'),
 (10, 2, 1, '2021-06-18 16:49:59'),
-(11, 3, 14, '2021-06-19 12:38:07'),
 (12, 3, 15, '2021-06-19 12:44:20'),
 (13, 2, 16, '2021-06-19 15:31:02'),
 (14, 3, 17, '2021-06-19 15:33:27'),
 (20, NULL, 25, '2021-06-21 11:17:43'),
 (21, 1, 26, '2021-06-21 11:27:25'),
-(22, 3, 27, '2021-06-21 15:34:56');
+(22, 3, 27, '2021-06-21 15:34:56'),
+(23, 2, 10, '2021-06-24 12:06:05'),
+(24, 2, 28, '2021-06-24 12:10:08'),
+(25, 3, 29, '2021-06-24 12:11:02'),
+(26, 3, 30, '2021-06-24 12:11:37'),
+(27, 2, 31, '2021-06-24 15:24:12'),
+(30, 3, 34, '2021-06-24 15:43:41'),
+(31, 4, 35, '2021-06-24 15:44:34');
 
 -- --------------------------------------------------------
 
@@ -327,6 +354,7 @@ CREATE TABLE `sales` (
   `customer_id` int(11) DEFAULT NULL,
   `receiver_id` int(11) DEFAULT NULL,
   `total` double DEFAULT NULL,
+  `paid` double DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `is_deleted` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
@@ -337,19 +365,31 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`sale_id`, `customer_id`, `receiver_id`, `total`, `status`, `is_deleted`, `user_id`, `date`) VALUES
-(22, NULL, NULL, 10800, 'Completed', 'No', 13, '2021-06-19 15:47:11'),
-(23, NULL, NULL, 21600, 'Completed', 'No', 13, '2021-06-21 18:12:18'),
-(24, 14, 15, 5400, 'Completed', 'No', 13, '2021-06-21 18:15:15'),
-(25, NULL, NULL, 12600, 'Completed', 'No', 1, '2021-06-22 10:48:59'),
-(26, NULL, NULL, 3600, 'Completed', 'No', 1, '2021-06-22 10:49:49'),
-(27, NULL, NULL, 1800, 'Completed', 'No', 1, '2021-06-22 10:50:25'),
-(28, NULL, NULL, 3600, 'Completed', 'No', 1, '2021-06-22 10:52:01'),
-(29, NULL, NULL, 3600, 'Completed', 'No', 1, '2021-06-22 10:52:21'),
-(30, NULL, NULL, 3000, 'Completed', 'No', 1, '2021-06-22 13:20:47'),
-(31, NULL, NULL, 7800, 'Completed', 'No', 1, '2021-06-22 13:21:13'),
-(32, NULL, NULL, 9600, 'Completed', 'No', 1, '2021-06-22 13:23:06'),
-(33, NULL, NULL, 4800, 'Completed', 'No', 1, '2021-06-22 13:25:28');
+INSERT INTO `sales` (`sale_id`, `customer_id`, `receiver_id`, `total`, `paid`, `status`, `is_deleted`, `user_id`, `date`) VALUES
+(22, NULL, NULL, 10800, NULL, 'Completed', 'No', 13, '2021-04-19 15:47:11'),
+(23, NULL, NULL, 21600, NULL, 'Completed', 'No', 13, '2021-06-01 18:12:18'),
+(24, 14, 15, 5400, NULL, 'Completed', 'No', 13, '2021-06-02 18:15:15'),
+(25, NULL, NULL, 12600, NULL, 'Completed', 'No', 1, '2021-06-02 15:50:54'),
+(26, NULL, NULL, 3600, NULL, 'Completed', 'No', 1, '2021-06-22 10:49:49'),
+(27, NULL, NULL, 1800, NULL, 'Completed', 'No', 1, '2021-06-22 10:50:25'),
+(28, NULL, NULL, 3600, NULL, 'Completed', 'No', 1, '2021-06-22 10:52:01'),
+(29, NULL, NULL, 3600, NULL, 'Completed', 'No', 1, '2021-06-22 10:52:21'),
+(30, NULL, NULL, 3000, NULL, 'Completed', 'No', 1, '2021-06-22 13:20:47'),
+(31, NULL, NULL, 7800, NULL, 'Completed', 'No', 1, '2021-06-22 13:21:13'),
+(32, NULL, NULL, 9600, NULL, 'Completed', 'No', 1, '2021-06-22 13:23:06'),
+(33, NULL, NULL, 4800, NULL, 'Completed', 'No', 1, '2021-06-22 13:25:28'),
+(34, NULL, NULL, NULL, NULL, 'Completed', 'No', 13, '2021-06-23 12:02:23'),
+(35, NULL, NULL, 4650, NULL, 'Completed', 'No', 16, '2021-06-23 13:55:23'),
+(36, NULL, NULL, NULL, NULL, 'Completed', 'No', 1, '2021-06-23 14:25:23'),
+(37, NULL, NULL, 37000, 35000, 'Completed', 'No', 1, '2021-06-24 14:18:05'),
+(38, NULL, NULL, 6000, 6000, 'Completed', 'No', 1, '2021-06-24 15:14:14'),
+(39, 18, 18, 9000, 8000, 'Completed', 'No', 31, '2021-06-24 15:37:34'),
+(40, NULL, NULL, 3000, NULL, 'Completed', 'No', 35, '2021-06-24 15:46:17'),
+(41, NULL, NULL, 39000, 38500, 'Completed', 'No', 1, '2021-06-24 16:24:45'),
+(42, NULL, NULL, 54600, NULL, 'Completed', 'No', 13, '2021-06-24 17:45:43'),
+(44, 16, 15, 77800, 77000, 'Completed', 'No', 1, '2021-06-26 10:56:44'),
+(45, 14, 15, 10500, 10000, 'Completed', 'No', 1, '2021-06-26 12:25:29'),
+(46, NULL, NULL, NULL, NULL, 'Completed', 'No', 1, '2021-06-26 15:09:31');
 
 -- --------------------------------------------------------
 
@@ -404,22 +444,28 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `phone`, `image`, `parent_id`, `status`, `date`, `created_at`, `updated_at`) VALUES
-(1, 'Basil', 'basil@gmail.com', NULL, '$2y$10$8UVo3SVELC2yc5N09EtcvOAXstHmJ1sCKHDE3UOtQ72WP/eQsT.1u', 'V9vxJw0kmcYOg9rU3A3532eJYGiaXjuS9zof7iJ2acGgUZXgiN84JnLqJkuF', NULL, NULL, 1, 'Active', '2021-05-28 13:21:42', '2021-05-28 05:42:58', '2021-05-28 05:42:58'),
+(1, 'Basil', 'basil@gmail.com', NULL, '$2y$10$8UVo3SVELC2yc5N09EtcvOAXstHmJ1sCKHDE3UOtQ72WP/eQsT.1u', 'qZ65rj7GcEXEsVNJDW00Q8s2zzgOctd8sgTeZu90pKG0mBzSXkKMS4c7BkHP', '03313817104', 'Images/Users/5YmUsh8o2FnK3Q8Ec1yDvlDN0iaVhbjtx7VaPKtn.jpg', 1, 'Active', '2021-05-28 13:21:42', '2021-05-28 05:42:58', '2021-05-28 05:42:58'),
 (6, 'Rashid', 'rashid@digitalsquare.us', NULL, '$2y$10$zhlevY1T.7ScGcb01tgg0.KrxYGiCiiVV/mdk1cxaUw3etQDsgp0m', NULL, '03313817104', NULL, 0, 'Active', '2021-06-01 12:08:03', '2021-06-01 07:08:03', '2021-06-01 07:08:03'),
 (7, 'adsf', 'rashidabbasi17@gmail.com', NULL, '$2y$10$RKbPW.wXLT2T2zvlJFcDJuG33sIkQP..eH8Y.BTEKoqOySiq0sWGS', NULL, '03313817104', NULL, 7, 'Active', '2021-06-01 12:26:39', '2021-06-01 07:26:39', '2021-06-01 07:26:39'),
 (8, 'Kamran Arshad', 'kamranarshad@gmail.com', NULL, '$2y$10$lHzqYZM9X1EoGkulPMbUW.9dRakOGvzUZH0py1YAy0o28trb5kUQe', NULL, '03313817104', NULL, 0, 'Active', '2021-06-02 13:39:29', '2021-06-02 08:39:29', '2021-06-02 08:39:29'),
 (9, 'Uzair', 'uzair@gmail.con', NULL, '$2y$10$71dBJxZxWQ/v2CfF/Stb5O3ftAQvV0lhHARnQMnX6LbCkSLmSaKP6', NULL, '5453454', 'Users/Products/rTUKCIQEIMoRadxGHmx9KjFlOUogp3InT2McRz9T.png', 0, 'Active', '2021-06-18 13:03:40', '2021-06-18 08:03:40', '2021-06-18 08:03:40'),
-(10, 'Bilal', 'bilal@gmail.com', NULL, '$2y$10$B3G93EowKmQ8T3j64Ab4A.b181EY4IqsLtDQDmYsX9VBX.MY9/gDa', NULL, '2123153', 'Users/Products/mlxDNccnsZjCvGBhB5VD86hVQ6VPLJaWa3jUkgHI.png', 0, 'Active', '2021-06-18 13:44:39', '2021-06-18 08:44:39', '2021-06-18 08:44:39'),
+(10, 'Bilal', 'bilal@gmail.com', NULL, '$2y$10$B3G93EowKmQ8T3j64Ab4A.b181EY4IqsLtDQDmYsX9VBX.MY9/gDa', NULL, '2123153', 'Users/Products/mlxDNccnsZjCvGBhB5VD86hVQ6VPLJaWa3jUkgHI.png', 10, 'Active', '2021-06-18 13:44:39', '2021-06-18 08:44:39', '2021-06-18 08:44:39'),
 (11, 'Hello', 'hello@gmail.com', NULL, '$2y$10$PfqZaoQnXWgsIhpWp.yBS.rDbBx07mPPpo4Dw1/WDmdRM5yTnJtj6', NULL, '5453454', 'Users/Products/51oIkJg3CwKNc26MKKW8r8jvQKjFb1PrzluUaFSi.png', 1, 'Active', '2021-06-18 13:48:12', '2021-06-18 08:48:12', '2021-06-18 08:48:12'),
 (12, 'osama', 'osama@mgail.com', NULL, '$2y$10$AOwPcC.457nQvFDEoH.gI.xF08SStOC0EqQ2yb6eZfOcKa65CLc6e', NULL, '134342341', NULL, 1, 'Active', '2021-06-18 15:31:27', '2021-06-18 10:31:27', '2021-06-18 10:31:27'),
 (13, 'User', 'user@gmail.com', NULL, '$2y$10$0T97fpXEhlWv.QjFlrKLNOXdjdMGqJwx3elpadvI05PhERq69120G', NULL, '51534453', NULL, 1, 'Active', '2021-06-18 16:19:34', '2021-06-18 11:19:34', '2021-06-18 11:19:34'),
-(14, 'user2 basil', 'user2@gmail.com', NULL, '$2y$10$qHlDoAeCrlCQJXDk1TN0s.Tv9xUz6rH3I0HB3m2DzIX0iHjhimtrS', NULL, '5453454', NULL, 1, 'Active', '2021-06-19 12:38:07', '2021-06-19 07:38:07', '2021-06-19 07:38:07'),
+(14, 'user2 basil', 'user2@gmail.com', NULL, '$2y$10$qHlDoAeCrlCQJXDk1TN0s.Tv9xUz6rH3I0HB3m2DzIX0iHjhimtrS', NULL, '5453454', 'Images/Customers/ZA7RPd8L0thG02ZzuvoN0DRwBtRzdEkONpa44th3.jpg', 1, 'Active', '2021-06-19 12:38:07', '2021-06-19 07:38:07', '2021-06-19 07:38:07'),
 (15, 'user 3', 'user3@gmail,com', NULL, '$2y$10$lA84xsw/3J1aY.VBd0FiJeja9NVgmszj0Cs9vDq4wZQIPKj4tW50a', NULL, '03313817104', NULL, 14, 'Active', '2021-06-19 12:44:20', '2021-06-19 07:44:20', '2021-06-19 07:44:20'),
 (16, 'Osama', 'osama@gmail.com', NULL, '$2y$10$KTEg3OdpSQqqZba8MQJloeuUOJsRhyNpTugOYy1qfRtUFq4tr0U7e', NULL, '54464', NULL, 16, 'Active', '2021-06-19 15:31:02', '2021-06-19 10:31:02', '2021-06-19 10:31:02'),
 (17, 'Osama1', 'osama1@gmail.com', NULL, '$2y$10$nK5DGqrmq73Z3Qr5szCwsOQptoX65vy/DwoY/aRF/KAUlP5OrN4Wa', NULL, '03313817104', NULL, 16, 'Active', '2021-06-19 15:33:27', '2021-06-19 10:33:27', '2021-06-19 10:33:27'),
 (25, 'Ali 2', 'ali@gmail.com', NULL, '$2y$10$h/OYgQPPisaljZKERo9gqOnCYmW1YuNnFvd/YJ76b9eam6FOPTPwi', NULL, '03313817104', NULL, 25, 'Active', '2021-06-21 11:17:43', NULL, NULL),
 (26, 'Super Admin', 'superadmin@admin.com', NULL, '$2y$10$5f/S91uYWpFrIgxosdwM8uT03m/oADxjG0r0x1tixWpcA91DcSGzu', NULL, '03212297360', NULL, 26, 'Active', '2021-06-21 11:27:25', NULL, NULL),
-(27, 'Manager', 'manager@gmail.com', NULL, '$2y$10$miudr9feMCMLSllratKt0OGeVv/D.wu8Kk0Rx9hj061UFgS6MiLki', NULL, '03313817104', NULL, 1, 'Active', '2021-06-21 15:34:56', NULL, NULL);
+(27, 'Manager', 'manager@gmail.com', NULL, '$2y$10$miudr9feMCMLSllratKt0OGeVv/D.wu8Kk0Rx9hj061UFgS6MiLki', NULL, '03313817104', NULL, 1, 'Active', '2021-06-21 15:34:56', NULL, NULL),
+(28, 'hamza', 'hamza@admin.com', NULL, '$2y$10$MKZtn8R7Oa1lQGcZhhKbn.QyjWlGaGRjRVLbGJ5ddsL3qKbF2R9dK', NULL, '03313817105', 'Images/Customers/WnMGIEvhrO8myxnmCcygxIqn45XvCYqzJltnc8SH.jpg', 28, 'Active', '2021-06-24 12:10:08', NULL, NULL),
+(29, 'hamza1', 'hamza1@manager.com', NULL, '$2y$10$F18WOR3T8GSJZKj.5bYdZ.abESwLcNu3nec/jc5lm3q96anKp8Lve', NULL, '2123153', NULL, 28, 'Active', '2021-06-24 12:11:02', NULL, NULL),
+(30, 'hamza2', 'hamza2@user.com', NULL, '$2y$10$jAfrlkzjQEUC4DW6RVpEne6t8OdxToTsGL.e2Sz3i8cyO4Bk144JG', NULL, '2123153', NULL, 28, 'Active', '2021-06-24 12:11:37', NULL, NULL),
+(31, 'TestAdmin', 'test@admin.com', NULL, '$2y$10$sqSMGTgDamMajpPGeOkJHeLyNIYmEAoXZqQB8RVTHWH7EAE4poUNO', NULL, '03313817104', 'Images/Customers/tDoSxAt7CNh38HDI78MlzicDYzr6wSmhrEJ12zzc.jpg', 31, 'Active', '2021-06-24 15:24:12', NULL, NULL),
+(34, 'ali', 'ali@manager.com', NULL, '$2y$10$sBQL0/kMYW84bRZcb1303uL1FRp.Ue5nflwfTpENUUTOuTK5FjfVO', NULL, '0333-3333-3323', NULL, 31, 'Active', '2021-06-24 15:43:41', NULL, NULL),
+(35, 'john', 'john@user.com', NULL, '$2y$10$kAP.x5lvE.wl8fEOhvy2Gu7p2xLnVMsZpc6MKGg8H1fScylRpsT3G', NULL, '0333-3333-3323', NULL, 31, 'Active', '2021-06-24 15:44:34', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -484,17 +530,17 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
-  ADD KEY `category_id` (`category_id`),
-  ADD KEY `discount_id` (`discount_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `products_ibfk_1` (`category_id`),
+  ADD KEY `products_ibfk_2` (`discount_id`),
+  ADD KEY `products_ibfk_3` (`user_id`);
 
 --
 -- Indexes for table `product_sales`
 --
 ALTER TABLE `product_sales`
   ADD PRIMARY KEY (`product_sale_id`),
-  ADD KEY `sale_id` (`sale_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_sales_ibfk_1` (`sale_id`),
+  ADD KEY `product_sales_ibfk_2` (`product_id`);
 
 --
 -- Indexes for table `roles`
@@ -548,7 +594,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -560,7 +606,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `discounts`
@@ -590,13 +636,13 @@ ALTER TABLE `outlets`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `product_sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `product_sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -608,13 +654,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_users`
 --
 ALTER TABLE `role_users`
-  MODIFY `role_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `role_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -632,7 +678,7 @@ ALTER TABLE `shopkeepers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
@@ -680,7 +726,7 @@ ALTER TABLE `products`
 -- Constraints for table `product_sales`
 --
 ALTER TABLE `product_sales`
-  ADD CONSTRAINT `product_sales_ibfk_1` FOREIGN KEY (`sale_id`) REFERENCES `sales` (`sale_id`),
+  ADD CONSTRAINT `product_sales_ibfk_1` FOREIGN KEY (`sale_id`) REFERENCES `sales` (`sale_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `product_sales_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --

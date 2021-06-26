@@ -60,6 +60,7 @@ Route::get('/sale-details', 'SaleController@sale_detail')->middleware('manager')
 Route::get('/pos/category','SaleController@pos_category')->middleware('user');
 Route::get('/pos','SaleController@pos')->middleware('user');
 Route::post('/generate-sales','SaleController@generate_sales')->middleware('user');
+Route::get('sale/delete', 'SaleController@delete');
 
 // USER
 Route::get('/user','UserController@index')->middleware('admin');
@@ -77,4 +78,5 @@ Route::get('/monthly_report','ReportController@monthly_report');
 Route::get('/weekly_report','ReportController@weekly_report');
 
 //SEARCH
-Route::post('/products/search', ['as' => 'search-products', 'uses' => 'SaleController@search_product']);
+// Route::post('/products/search', ['as' => 'search-products', 'uses' => 'SaleController@search_product']);
+Route::get('/products/search', 'SaleController@search_product');

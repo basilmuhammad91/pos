@@ -10,6 +10,8 @@ $blade_users = DB::table('users')
 ->first();
 
 ?>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
@@ -108,8 +110,11 @@ $blade_users = DB::table('users')
                                 
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <form method="post"> 
+                                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                            <input type="text" name="search" id="search" placeholder="Search Products" class="form-control">
+                                        </form>
                                         
-                                        <input type="text" name="search" id="search" placeholder="Search Products" class="form-control">
                                         
                                     </div>
                                     <div class="col-md-3 offset-5">
@@ -292,29 +297,32 @@ $blade_users = DB::table('users')
 </div>
 <!-- /.modal -->
 
-                                <div class="row">
-                                    @foreach($products->where('status','Active') as $obj)
-                                    <div class="col-md-3 col-lg-2 col-sm-4 text-center mb-3 mt-5">
-                                        <div class="text-center" style="margin: auto;">
-                                            <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_{{ $obj->product_id }}" onclick="myFunction('{{$obj->name}}', {{$obj->product_id }}, {{ $obj->s_price }});" >
-                                                <h6 style="color: white; text-transform: uppercase; background-color: 2c6ea8; padding: 0.1em 2em; background-color: 2c6ea8; border-radius: 0.3em 0.3em 0 0; margin: 0; ">{{ $obj->category->name }}</h6>
-                                                <div class="sub-box px-4 py-4" style="background-color: white; margin-bottom: 0.9em; box-shadow: inset 0 0 4px #000000; ">
-                                                    
-                                                    @if($obj->image != null)
+                                <div class="custom-height" style="height: 80vh; overflow: auto;">
+                                    <div class="row" id="search_content">
+                                        @foreach($products->where('status','Active') as $obj)
+                                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 text-center mb-3 mt-5">
+                                            <div class="text-center" style="margin: auto;">
+                                                <div class="box px-3 py-3" style="background-color: #428BCA; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" id="add_product_{{ $obj->product_id }}" onclick="myFunction('{{$obj->name}}', {{$obj->product_id }}, {{ $obj->s_price }});" >
+                                                    <h6 style="color: white; text-transform: uppercase; background-color: 2c6ea8; padding: 1px 1px; background-color: 2c6ea8; border-radius: 0.3em 0.3em 0 0; margin: 0; ">{{ $obj->category->name }}</h6>
+                                                    <div class="sub-box px-4 py-4" style="background-color: white; margin-bottom: 0.9em; box-shadow: inset 0 0 4px #000000; ">
+                                                        
+                                                        @if($obj->image != null)
 
-                                                    <img src="{{asset('storage/'.$obj->image)}}" width="60"></td>
+                                                        <img src="{{asset('storage/'.$obj->image)}}" width="60"></td>
 
-                                                    @else
-                                                    <img src="{{asset('DashboardAssets')}}/img/category-icon.png" class="img-fluid" width="60">
+                                                        @else
+                                                        <img src="{{asset('DashboardAssets')}}/img/category-icon.png" class="img-fluid" width="60">
 
-                                                    @endif
+                                                        @endif
 
+                                                    </div>
+                                                    <h6 style="color: white; margin-top: 1em; text-transform: uppercase; background-color: 2c6ea8; padding: 1px 1px; background-color: 2c6ea8; border-radius: 0.3em">{{ $obj->name }} - {{ $obj->s_price }}</h6>
                                                 </div>
-                                                <h6 style="color: white; margin-top: 1em; text-transform: uppercase; background-color: 2c6ea8; padding: 0.1em 2em; background-color: 2c6ea8; border-radius: 0.3em">{{ $obj->name }} - {{ $obj->s_price }}</h6>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </div>
-                                    @endforeach
+                                    <div class="row" id="ajax_search_content"></div>
                                 </div>
                                 <style type="text/css">
                                     .pag nav
@@ -323,7 +331,7 @@ $blade_users = DB::table('users')
                                         margin: auto;
                                     }
                                 </style>
-                                <span class="pag">{{ $products->links("pagination::bootstrap-4") }}</span>
+                                
                              </div>   
 
                             <div class="col-md-3">
@@ -485,7 +493,7 @@ $(document).ready(function(){
         <?php
     }
     ?>
-
+    
     <?php
     if($status=="Updated")
     {
@@ -546,6 +554,8 @@ $("#imgUpload2").change(function(){
     var grand_total = 0;
     function myFunction(name, id, unit_price)
     {
+        alert('sdfsd');
+
         var isExist = false;
         myArr.forEach(function(item){
             if(item.id == id)
@@ -583,6 +593,10 @@ $("#imgUpload2").change(function(){
             invoice_div.innerHTML += '<div class="row sub-invoice text-left mx-2 my-2 px-1 py-2" id="invoice-row"><div class="col-12"></div><div class="col-8 mt-2"><b><h4>'+item.name+'</h4><input type="hidden" name="product_id[]" value="'+item.id+'" /></b></div><div class="col-4 text-right"><span class="float-right close_btn" id="close_btn" style="cursor: pointer;"><i class="fa fa-fw fa-times-circle"></i></span><br><h5 style="margin: 0; padding: 0; ">'+item.quantity*item.price+'</h5></div><div class="col-12"><span><i class="fa fa-fw fa-plus-circle"></i> <span>'+item.quantity+'</span><input type="hidden" name="quantity[]" value="'+item.quantity+'" /> Unit(s) </span><span class="mr-3"><i class="fa fa-fw fa-minus-circle"></i>'+item.price+'  per unit</span><input type="hidden" name="price[]" value="'+item.quantity*item.price+'" /></div></div>';
         });
     }
+
+</script>
+<script type="text/javascript">
+
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
 });
@@ -604,27 +618,40 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('body').on('keyup', '#search', function(){
         var search_text = $(this).val();
-
-        $.ajax({
-            method: 'POST',
-            url: '{{ route("search-products") }}',
-            dataType: 'json',
-            data: {
-                '_token' : '{{ csrf_token() }}',
-                search_text: search_text
-            },
-
-            success: function(res)
-            {
-                console.log(res);
-            }
-        });
-
+        var search_content = document.getElementById('search_content');
+        if(search_text != '')
+        {
+            $.ajax({
+                type: 'get',
+                url : '{{URL::to('products/search')}}',
+                data:{'search_text':search_text},
+                success:function(data)
+                {
+                    if(search_text != null)
+                    {
+                        $('#search_content').hide();
+                        $('#ajax_search_content').html(data);
+                    }
+                    else
+                    {
+                        $('#search_content').show();
+                        $('#ajax_search_content').html('');
+                    }
+                }
+            });
+        }
+        else
+        {
+            $('#search_content').show();
+            $('#ajax_search_content').html('');
+        }
+        
     });
 });
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+
+
+</script>
+
+<script type="text/javascript">
+$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 </script>

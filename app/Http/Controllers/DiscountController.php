@@ -163,9 +163,11 @@ class DiscountController extends Controller
 
     public function delete(Request $req)
     {
-    	$discount = Discount::where(["discount_id"=>$req->discount_id])->update([
-    		"is_deleted" => "Yes"
-    	]);
+    	// $discount = Discount::where(["discount_id"=>$req->discount_id])->update([
+    	// 	"is_deleted" => "Yes"
+    	// ]);
+
+        $discount = Discount::where(["discount_id"=>$req->discount_id])->delete();
         
     	if($discount)
     	{
