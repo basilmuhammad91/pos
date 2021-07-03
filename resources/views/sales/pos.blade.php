@@ -289,7 +289,8 @@ $blade_users = DB::table('users')
 </div>
 <!-- /.modal -->
 
-                                <div class="row">
+                                <div class="custom-height" style="height: 80vh; overflow: auto;">
+                                    <div class="row">
                                     @foreach($category->product->where('status','Active') as $obj)
                                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 text-center mb-3 mt-5">
                                         <div class="text-center" style="margin: auto;">
@@ -312,6 +313,7 @@ $blade_users = DB::table('users')
                                         </div>
                                     </div>
                                     @endforeach
+                                </div>
                                 </div>
                                 
                              </div>   
@@ -365,7 +367,7 @@ $blade_users = DB::table('users')
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button class="btn btn-default col-12" style="color: black; ">Reset</button>
+                                        <a href="{{action('SaleController@pos')}}?category_id={{$category->category_id}}" class="btn btn-default col-12" style="color: black;">Reset</a>
                                     </div>
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary col-12" style="color: white; ">Pay Now</button>

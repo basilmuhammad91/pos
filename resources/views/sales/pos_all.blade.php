@@ -384,7 +384,8 @@ $blade_users = DB::table('users')
                                 <br>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button class="btn btn-default col-12" style="color: black; ">Reset</button>
+                                        <a href="{{action('SaleController@pos')}}?category_id=0" class="btn btn-default col-12" style="color: black;">Reset</a>
+                                        
                                     </div>
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary col-12" style="color: white; ">Pay Now</button>
@@ -554,7 +555,7 @@ $("#imgUpload2").change(function(){
     var grand_total = 0;
     function myFunction(name, id, unit_price)
     {
-        alert('sdfsd');
+        // alert('sdfsd');
 
         var isExist = false;
         myArr.forEach(function(item){

@@ -172,7 +172,7 @@ $blade_users = DB::table('users')
                                 </div>
 
                         		@foreach($category as $obj)
-                        		<div class="col-md-2 text-center mb-3 mt-5">
+                        		<div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 text-center mb-3 mt-5">
 	                        		<div class="text-center" style="width: fit-content; margin: auto;">
 	                        			<div class="box px-3 py-3" style="background-color: #428BCA; width: fit-content; border-radius: 0.6em; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); cursor: pointer;" onclick="location.href = '{{action('SaleController@pos')}}?category_id={{$obj->category_id}}'">
 	                        				<div class="sub-box px-4 py-4" style="background-color: white; margin-bottom: 0.5em; box-shadow: inset 0 0 4px #000000; ">
